@@ -1,8 +1,7 @@
 #ifndef DRAWABLE_H
 #define DRAWABLE_H
 
-#include <GL/gl.h>
-#include <GL/glut.h>
+#include <graphics/graphics.h>
 #include <common/point.h>
 #include <images/textures.h>
 

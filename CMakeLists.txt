@@ -7,7 +7,7 @@ find_package(GLUT REQUIRED)
 include_directories(${GLUT_INCLUDE_DIR})
 
 find_package(OpenGL REQUIRED)
-include_directories(${OPENGL_INCLUDE_DIR})
+#include_directories(${OPENGL_INCLUDE_DIR})
 
 find_package(PNG REQUIRED)
 include_directories(${PNG_INCLUDE_DIR})

@@ -1,8 +1,6 @@
 #include <vector>
 #include <common/point.h>
 #include <graphics/graphics.h>
-#include <GL/gl.h>
-#include <GL/glut.h>
 #include <images/textures.h>
 #include "input.h"
 #include "world.h"

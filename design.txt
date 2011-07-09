@@ -28,6 +28,7 @@ Iteration 1 / Basic Improvements
 	
 	World is populated by trees which are obstacles for Red and wolves
 	Smarter Red / Wolf AI
+	Fiddle with input
 
 Iteration 2 / Advanced Improvements
 

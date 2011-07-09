@@ -1,5 +1,3 @@
-#include <GL/glut.h>
-#include <GL/gl.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <png.h>
@@ -7,6 +5,7 @@
 #include <exception>
 #include <string>
 #include <map>
+#include <graphics/graphics.h>
 #include "textures.h"
 
 using namespace std;
