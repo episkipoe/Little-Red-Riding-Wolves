@@ -10,18 +10,12 @@ class Red : public Drawable {
 		Red () {
 			resetLocation();
 			speed=40;
-            radius=20;//TODO:tweak this to fit sprite
-            viewDistance=5;//Red can see 5 times her radius
+			radius=20;//TODO:tweak this to fit sprite
+			viewDistance=5;//Red can see 5 times her radius
 		}
 
 		void draw() {
-			int size = 2;
-			glColor3f(1,0,0);
-			glBegin(GL_TRIANGLES);
-				glVertex3f(location.x-size, location.y-size, location.z);
-				glVertex3f(location.x+size, location.y-size, location.z);
-				glVertex3f(location.x, location.y+size, location.z);
-			glEnd();
+			draw_texture("red", location, 10);
 		}
 
 		void resetLocation() {
@@ -44,7 +38,7 @@ class Red : public Drawable {
 				moveVector = moveVector + (housePos + location * -1)*3;
 
 				moveVector.normalize();
-			} else { //following the path
+			} else if (pathPoints.size() > 0) { //following the path
 				if (location.distance(pathPoints[pathPosition])<15) pathPosition++; //advance the pathPoints list if at the corner
 				if (pathPosition<pathPoints.size()) {
 					follow(pathPoints[pathPosition]);
@@ -81,7 +75,7 @@ private:
 	bool beingChased;
 	vector<Point> avoidanceList;
 	vector<Point> pathPoints;
-	int pathPosition;
+	size_t pathPosition;
 };
 
 #endif

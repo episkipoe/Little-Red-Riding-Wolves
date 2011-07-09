@@ -8,15 +8,15 @@ class Wolf : public Drawable {
 		Wolf (Point loc)  { 
 			location = loc;
 			speed=30;
-            radius = 20;//TODO:Tweak radius for collision
-            viewDistance = 3;//Wolves can see 3 times their raidus away from themselves
+			radius = 20;//TODO:Tweak radius for collision
+			viewDistance = 3;//Wolves can see 3 times their raidus away from themselves
 		}
 
 		void draw() {
 #ifdef DEBUG
 			printf("drawing at %g, %g\n", location.x, location.y);
 #endif
-            draw_texture("wolf", location, 10);
+			draw_texture("wolf", location, 10);
 		}		
 
 		void chase(Point red) {

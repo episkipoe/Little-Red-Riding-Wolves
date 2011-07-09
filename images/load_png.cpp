@@ -172,8 +172,10 @@ GLuint loadTexture(const string & file_name) {
 }
 
 void loadImages() {
-	name_to_texture["tree"] = loadTexture("images/tree01.png");
+	name_to_texture["tree"] = loadTexture("images/Tree.png");
 	name_to_texture["wolf"] = loadTexture("images/wolf.png");
+	name_to_texture["house"] = loadTexture("images/GMHouse.png");
+	name_to_texture["red"] = loadTexture("images/RRH.png");
 }
 
 void draw_texture(std::string name, Point location, float size) {
