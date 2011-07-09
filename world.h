@@ -48,6 +48,8 @@ class World {
 		std::vector<Drawable *> obstacles;
 		Red red;	
 		House house;
+
+		bool victory;
 };
 
 #endif

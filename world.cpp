@@ -79,6 +79,7 @@ void World::display() {
 	red.draw();
 
 	if(phase==GAME_OVER) {
+		(victory ? glColor3f(0,0,0) : glColor3f(1,0,0));
 		drawText(0, 0, game_over_message, Font());
 	}
 }
@@ -93,12 +94,14 @@ void World::processOneEvent() {
 void World::playerWins() {
 	glClearColor(1,1,1,1);
 	game_over_message = "A winnar is you!";
+	victory=true;
 	switchPhase(GAME_OVER);
 }
 
 void World::playerLoses(const string & reason) {
 	glClearColor(0,0,0,1);
 	game_over_message = reason;
+	victory=false;
 	switchPhase(GAME_OVER);
 }
 
