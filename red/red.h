@@ -10,6 +10,8 @@ class Red : public Drawable {
 		Red () {
 			resetLocation();
 			speed=40;
+            radius=20;//TODO:tweak this to fit sprite
+            viewDistance=5;//Red can see 5 times her radius
 		}
 
 		void draw() {
