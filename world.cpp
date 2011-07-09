@@ -152,3 +152,11 @@ void World::handleKeyboard(unsigned char key, int x, int y) {
     }
 }
 
+void World::genWorld() {
+	srand(389209);
+	for (int i=0; i<40; i++) {
+		Point pos(rand()%201-100,rand()%201-100);
+		obstacles.push_back(new Tree(pos));
+	}
+}
+
