@@ -2,8 +2,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "display.h"
+#include "world.h"
 
 extern bool is_paused;
+extern World world;
 
 namespace input {
 
@@ -71,7 +73,7 @@ namespace input {
 	}
 
 	void mouse(int button, int state, int x, int y) {
-		
+		world.handleMouse(button, state, x, y);			
 	}
 
 	void register_callbacks(void) {

@@ -2,6 +2,7 @@
 #define RED_H
 
 #include <drawable.h>
+#include <images/textures.h>
 class Red : public Drawable {
 	public:
 		void draw() {
@@ -12,6 +13,9 @@ class Red : public Drawable {
 				glVertex3f(location.x+size, location.y-size, location.z);
 				glVertex3f(location.x, location.y+size, location.z);
 			glEnd();
+
+			draw_texture("tree", location);
+
 		}
 };
 

@@ -25,6 +25,8 @@ class World {
 
 		void playerWins();
 		void playerLoses(const string & reason);
+
+		void handleMouse(int button, int state, int x, int y);
 	
 		void addWolf(const Wolf & newWolf) { wolves.push_back(newWolf); }
 		//TODO vector<Point> getWolfLocations() 

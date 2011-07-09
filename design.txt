@@ -1,0 +1,26 @@
+Little Red Riding Wolves
+
+Iteration 0 / Basic Game Infrastructure
+
+	Place Wolf phase:
+		Player places wolves in the world by left clicking on an empty space
+		Player presses space to switch to Red phase 
+			User-defined placement of wolves is stored 
+
+	AI Red phase:
+		Wolves move towards Red, Red moves towards the house
+		If Red reaches the house the Player loses
+		If Red is eaten by a wolf switch to Player Red phase
+			User-defined placement of wolves is loaded 
+
+	Player Red phase:
+		Player uses arrow keys to guide Red to the house
+		If Red is eaten by a wolf the Player loses
+		If Red reaches the house the Player wins
+
+
+Iteration 1 / Improvements
+	
+	World is populated by trees which are obstacles for Red and wolves
+	World has a path that AI Red attempts to follow
+	Improvements to Red / Wolf AI

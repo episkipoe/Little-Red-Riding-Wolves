@@ -3,6 +3,7 @@
 #include <graphics/graphics.h>
 #include <GL/gl.h>
 #include <GL/glut.h>
+#include <images/textures.h>
 #include "input.h"
 #include "world.h"
 
@@ -55,10 +56,12 @@ void initialize_display(void) {
 	glClearColor(0.3f,1.0f,0.3f,1.0f); 
 	glEnable(GL_DEPTH_TEST);
   	glDepthFunc(GL_LESS);
+	glEnable( GL_TEXTURE_2D );
   	glPointSize(4.0);
 	glLineWidth(2.0);
 	eye.z=100;
 
+	loadImages();
 	reshape(width,height);
 }
 

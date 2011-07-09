@@ -69,3 +69,8 @@ void World::playerLoses(const string & reason) {
 }
 
 
+void World::handleMouse(int button, int state, int x, int y) {
+	if(phase != PLACE_WOLF) return; 
+	Wolf wolf(x, y);
+	addWolf(wolf);
+}

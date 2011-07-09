@@ -10,6 +10,7 @@ class Wolf : public Drawable {
 		}
 
 		void draw() {
+			printf("drawing at %g, %g\n", location.x, location.y);
 			glColor3f(0.8, 0.8, 0.8);
 			glPointSize(4);
 			glBegin(GL_POINTS);

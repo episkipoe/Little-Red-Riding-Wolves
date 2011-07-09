@@ -4,12 +4,19 @@ project(wolves)
 SET(CMAKE_CXX_FLAGS_DEBUG  "-Wall -fno-rtti -O0 -g")
 
 find_package(GLUT REQUIRED)
-#find_package(OpenGL REQUIRED)
+include_directories(${GLUT_INCLUDE_DIR})
+
+find_package(OpenGL REQUIRED)
+include_directories(${OPENGL_INCLUDE_DIR})
+
+find_package(PNG REQUIRED)
+include_directories(${PNG_INCLUDE_DIR})
 
 add_library (main
 	display.cpp display.h
 	input.cpp input.h
 	world.cpp world.h
+	images/load_png.cpp
 )
 
 add_library (agents
@@ -29,8 +36,6 @@ target_link_libraries(wolves
 	agents
 	graphics
 	common
-	${GLUT_LIBRARY} 
-	${OPENGL_LIBRARY}
-	${GLU_LIBRARY} 
-	${OpenGL_LIBS} ${OPENGL_gl_LIBRARY} ${OPENGL_glu_LIBRARY} ${GLUT_LIBRARY}
+	${PNG_LIBRARY}
+	${OPENGL_LIBRARIES} ${GLUT_LIBRARIES}
 )
