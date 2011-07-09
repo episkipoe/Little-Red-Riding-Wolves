@@ -10,12 +10,12 @@ class Red : public Drawable {
 		Red () {
 			resetLocation();
 			speed=40;
-			radius=20;//TODO:tweak this to fit sprite
+			radius=4;//TODO:tweak this to fit sprite
 			viewDistance=5;//Red can see 5 times her radius
 		}
 
 		void draw() {
-			draw_texture("red", location, 10);
+			draw_texture("red", location, 5, 10);
 		}
 
 		void resetLocation() {

@@ -8,7 +8,7 @@ class Tree : public Drawable {
 		Tree (Point & loc) { location = loc; }
 		void draw() {
 			glColor3f(0.8,0.8,0.8);
-			draw_texture("tree", location, 10);
+			draw_texture("tree", location, 10, 10);
 		}
 };
 

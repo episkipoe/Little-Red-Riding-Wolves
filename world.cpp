@@ -22,15 +22,15 @@ namespace {
 }
 
 void World::processOneEvent() {
-    processWolfEvent();
-    processRedEvent();
+	processWolfEvent();
+	processRedEvent();
 }
 
 void World::processRedEvent() { 
     if (red.touches(&house)) {
         if(phase == PLAYER_RED) {
             playerWins();
-        } else if(phase == PLAYER_RED) {
+        } else if(phase == AI_RED) {
             playerLoses("Robot red has reached the house");
         }
     }
@@ -43,21 +43,19 @@ void World::processRedEvent() {
 }
 
 void World::processWolfEvent() { 
-    for(size_t i=0; i<wolves.size(); i++) {
-        Wolf wolf = wolves[i];
-        if(phase == PLACE_WOLF) return;
+	if(phase == PLACE_WOLF) return;
+	for(size_t i=0; i<wolves.size(); i++) {
+		if(wolves[i].touches(&red)) {
+			if(phase == AI_RED) {
+				switchPhase(PLAYER_RED);
+			} else if(phase == PLAYER_RED) {
+				playerLoses("You have been eaten.");
+			}
+		}
 
-        if(wolf.touches(&red)) {
-            if(phase == AI_RED) {
-                switchPhase(PLAYER_RED);
-            } else if(phase == PLAYER_RED) {
-                playerLoses("You have been eaten.");
-            }
-        }
-
-        wolf.chase(red.getLocation());
-        wolf.update(.01);
-    }
+		wolves[i].chase(red.getLocation());
+		wolves[i].update(.01);
+	}
 }
 
 void World::switchPhase(Phase new_phase) {

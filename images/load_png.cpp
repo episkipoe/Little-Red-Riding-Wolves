@@ -180,13 +180,13 @@ void loadImages() {
 	name_to_texture["fence"] = loadTexture("images/Fence.png");
 }
 
-void draw_texture(std::string name, Point location, float size) {
+void draw_texture(std::string name, Point location, float width, float height) {
 	glColor4f(1,1,1,1);
 	glEnable( GL_TEXTURE_2D );
 	glBindTexture( GL_TEXTURE_2D, get_texture(name) );
 	glPushMatrix();
 		glTranslatef(location.x, location.y, 0);
-		glScalef(size, size, size);
+		glScalef(width, height, 1);
 		glBegin( GL_QUADS );
 			glTexCoord2d(0.0,0.0); glVertex2d(-0.5,-0.5);
 			glTexCoord2d(1.0,0.0); glVertex2d(.5,-0.5);
