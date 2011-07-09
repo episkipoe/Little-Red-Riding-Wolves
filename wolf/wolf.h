@@ -8,6 +8,8 @@ class Wolf : public Drawable {
 		Wolf (Point loc)  { 
 			location = loc;
 			speed=30;
+            radius = 20;//TODO:Tweak radius for collision
+            viewDistance = 3;//Wolves can see 3 times their raidus away from themselves
 		}
 
 		void draw() {
@@ -31,8 +33,6 @@ class Wolf : public Drawable {
 protected:
 	Point moveVector;
 	float speed;
-
-		
 };
 
 #endif
