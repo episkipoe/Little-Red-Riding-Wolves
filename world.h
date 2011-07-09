@@ -28,6 +28,7 @@ class World {
 
 		void handleMouse(int button, int state, int x, int y);
 		void handleKeyboard(unsigned char key, int x, int y);
+		void placeObject(int button, int x, int y);
 	
 		void addWolf(const Wolf & newWolf) { wolves.push_back(newWolf); }
 		vector<Wolf> & getWolves() { return wolves; }

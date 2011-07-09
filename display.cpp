@@ -25,9 +25,12 @@ void display(void) {
 }
 
 void set_eye(void) {
+   	glMatrixMode(GL_PROJECTION) ;
+   	glLoadIdentity();
+
+	glOrtho(look.x-100, look.x+100, look.y-100, look.y+100, 0, 1);
   	glMatrixMode(GL_MODELVIEW);
   	glLoadIdentity();
-	gluLookAt(eye.x, eye.y, eye.z, look.x, look.y, look.z, 0.0, 1.0, 0.0);
 
 	glutPostRedisplay();
 }
@@ -35,7 +38,9 @@ void set_eye(void) {
 void reshape(int w, int h) {
    	glMatrixMode(GL_PROJECTION) ;
    	glLoadIdentity();
-	gluPerspective(45, w / h, 0.2, 1000);
+
+	glOrtho(look.x-100, look.x+100, look.y-100, look.y+100, 0, 1);
+		
   	glMatrixMode(GL_MODELVIEW);
 	glViewport(0,0,w,h);
 	set_eye();

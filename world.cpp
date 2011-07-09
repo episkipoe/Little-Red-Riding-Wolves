@@ -36,6 +36,21 @@ namespace {
 		wolf.chase(world.getRed().getLocation());
 		wolf.update(.01);
 	}
+
+	Point screenToWorld(int x, int y) {
+		int viewport[4];
+		double projection[16];
+		double modelview[16];
+		glGetIntegerv(GL_VIEWPORT,viewport);
+		glGetDoublev(GL_PROJECTION_MATRIX,projection);
+		glGetDoublev(GL_MODELVIEW_MATRIX , modelview);
+
+		double worldX, worldY, worldZ;
+		gluUnProject( x, viewport[3]-y, 0, modelview, projection, viewport, &worldX, &worldY, &worldZ );
+		return Point(worldX,worldY,0);
+	}
+
+
 }
 
 void World::switchPhase(Phase new_phase) {
@@ -86,20 +101,21 @@ void World::playerLoses(const string & reason) {
 	switchPhase(GAME_OVER);
 }
 
-
-void World::handleMouse(int button, int state, int x, int y) {
-	if(phase != PLACE_WOLF) return; 
-	if(state==GLUT_DOWN) return;
-
-	//TODO  translate scr coords to world coords
-	//Make sure space is empty
-
+void World::placeObject(int button, int x, int y) {
+	Point clicked = screenToWorld(x,y);
 	if (button == GLUT_LEFT_BUTTON) {
-		Wolf wolf(look);
+		Wolf wolf(clicked);
 		addWolf(wolf);
 	} else {
-		obstacles.push_back(new Tree(look));
+		obstacles.push_back(new Tree(clicked));
 	}
+}
+
+void World::handleMouse(int button, int state, int x, int y) {
+	if(state==GLUT_DOWN) return;
+
+	if(phase == PLACE_WOLF) placeObject(button, x, y); 
+
 }
 
 void World::handleKeyboard(unsigned char key, int x, int y) {
