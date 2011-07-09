@@ -19,8 +19,9 @@ class Red : public Drawable {
 		}
 
 		void resetLocation() {
-			location.x = 40;
-			location.y = location.z = 0;
+			location.x = 80;
+			location.y = -60;
+			location.z = 0;
 			lastLoc = location;
 			onPath=false;
 			beingChased=false;

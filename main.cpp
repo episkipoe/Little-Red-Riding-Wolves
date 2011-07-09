@@ -20,7 +20,7 @@ void timer(int val) {
 	} 
 
 	if(val==GAME_TIMER) {
-		glutTimerFunc(100,  timer, val);  
+		glutTimerFunc(50,  timer, val);  
 		world.processOneEvent();
 		glutPostRedisplay();
 		return;

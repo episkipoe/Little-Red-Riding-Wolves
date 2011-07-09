@@ -36,7 +36,7 @@ class World {
 		Red getRed() { return red; }
 		House getHouse() {return house; }
 	
-		bool overlapsWithHouse(Point location) { return house.getLocation().inRange(location, 5); }		
+		bool overlapsWithHouse(Point location) { return house.getLocation().inRange(location, 35); }		
 		bool overlapsWithRed(Point location) { return red.getLocation().inRange(location, 5); }		
 
 	private:

@@ -11,7 +11,7 @@ namespace {
 		if (world.overlapsWithHouse(red.getLocation())) {
 			if(world.phase == PLAYER_RED) {
 				world.playerWins();
-			} else if(world.phase == PLAYER_RED) {
+			} else if(world.phase == AI_RED) {
 				world.playerLoses("Robot red has reached the house");
 			}
 		}
