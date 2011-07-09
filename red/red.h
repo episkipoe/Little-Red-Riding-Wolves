@@ -3,6 +3,8 @@
 
 #include <drawable.h>
 #include <images/textures.h>
+#include <wolf/wolf.h>
+#include <vector>
 class Red : public Drawable {
 	public:
 		Red () {
@@ -23,6 +25,26 @@ class Red : public Drawable {
 			location.x = 40;
 			location.y = location.z = 0;
 		}
+
+		void chase(vector<Wolf>& wolvesVector) {
+
+			for (unsigned int i=0; i<wolvesVector.size(); i++){
+				Point wolfPos = wolvesVector[i].getLocation();
+				moveVector.x += wolfPos.x - location.x;
+				moveVector.y += wolfPos.y - location.y;
+			}
+
+			moveVector.normalize();
+
+		}
+
+		void update(float frameTime) {
+			location = location + moveVector * speed * frameTime;
+		}
+
+private:
+	Point moveVector;
+	float speed;
 };
 
 #endif

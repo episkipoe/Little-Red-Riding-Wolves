@@ -12,8 +12,11 @@ class Drawable {
 
 		Point getLocation() { return location; }
 
+		virtual void update(float) {};
+
 	protected:
 		Point location;
+		Point lastLoc;
 };
 
 #endif

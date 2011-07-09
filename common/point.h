@@ -36,6 +36,13 @@ struct Point  //stores a location
 		//printf("\t\ta %g b %g c %g : %g / %g\n", a, b, c, (pow(a,2) + pow(c,2) - pow(b,2)), (2.0 * a * c));
 		return acos(cosB);
 	}
+	float normalize() {
+		float max = (x>y) ? x : y;
+		max = (z>max) ? z : max;
+		x/=max;
+		y/=max;
+		z/=max;
+	}
 	bool operator==(const Point &rhs) {
 		return ((x == rhs.x) &&
 			(y == rhs.y));

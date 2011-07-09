@@ -2,10 +2,12 @@
 #define WOLF_H
 
 #include <drawable.h>
+
 class Wolf : public Drawable {
 	public:
 		Wolf (Point loc)  { 
 			location = loc;
+			speed=180;
 		}
 
 		void draw() {
@@ -18,6 +20,20 @@ class Wolf : public Drawable {
 			glVertex3f(location.x, location.y, location.z);
 			glEnd();
 		}		
+
+		void chase(Point red) {
+			moveVector.x=red.x-location.x;
+			moveVector.y=red.y-location.y;
+			moveVector.normalize();
+		}
+
+		void update(float frameTime) {
+			location = location + moveVector * speed * frameTime;
+		}
+
+protected:
+	Point moveVector;
+	float speed;
 
 		
 };
