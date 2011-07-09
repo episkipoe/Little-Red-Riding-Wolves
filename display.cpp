@@ -51,7 +51,7 @@ void initialize_display(void) {
 	glutReshapeFunc(reshape) ;
 	input::register_callbacks();
 	/*get ready to draw*/
-	glClearColor(0.3f,1.0f,0.3f,1.0f); 
+	glClearColor(0.0f,0.0f,0.0f,1.0f); 
 	glEnable(GL_DEPTH_TEST);
   	glDepthFunc(GL_LESS);
 	glEnable(GL_BLEND);

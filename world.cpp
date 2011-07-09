@@ -41,7 +41,10 @@ namespace {
 void World::switchPhase(Phase new_phase) {
 	//playerLoses("Robot red has reached the house");
 	phase = new_phase;
-	if(new_phase == AI_RED) {
+	if(new_phase == PLACE_WOLF) {
+		glClearColor(0.0f,0.0f,0.0f,1.0f); 
+	} else if(new_phase == AI_RED) {
+		glClearColor(0.3f,1.0f,0.3f,1.0f); 
 		saved_wolves = wolves;
 	} else if(new_phase == PLAYER_RED) {
 		red.resetLocation();
@@ -72,11 +75,13 @@ void World::processOneEvent() {
 }
 
 void World::playerWins() {
+	glClearColor(1,1,1,1);
 	game_over_message = "A winnar is you!";
 	switchPhase(GAME_OVER);
 }
 
 void World::playerLoses(const string & reason) {
+	glClearColor(0,0,0,1);
 	game_over_message = reason;
 	switchPhase(GAME_OVER);
 }
@@ -100,10 +105,22 @@ void World::handleMouse(int button, int state, int x, int y) {
 void World::handleKeyboard(unsigned char key, int x, int y) {
 	switch(key) {
 		case ' ':
-			if(phase==PLACE_WOLF) switchPhase(AI_RED);
-			if(phase==AI_RED) switchPhase(PLAYER_RED);
-			if(phase==PLAYER_RED) switchPhase(GAME_OVER);
-			if(phase==GAME_OVER) switchPhase(PLACE_WOLF);
+			if(phase==PLACE_WOLF) {
+				switchPhase(AI_RED);
+				return;
+			}
+			if(phase==AI_RED) {
+				switchPhase(PLAYER_RED);
+				return;
+			}
+			if(phase==PLAYER_RED) {
+				switchPhase(GAME_OVER);
+				return;
+			}
+			if(phase==GAME_OVER) {
+				switchPhase(PLACE_WOLF);
+				return;
+			}
 	}
 }
 
