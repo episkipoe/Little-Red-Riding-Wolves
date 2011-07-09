@@ -7,7 +7,7 @@ class Wolf : public Drawable {
 	public:
 		Wolf (Point loc)  { 
 			location = loc;
-			speed=180;
+			speed=30;
 		}
 
 		void draw() {

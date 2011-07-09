@@ -19,7 +19,7 @@ namespace {
 		if(world.phase != AI_RED) { return ; }
 
 		red.chase(world.getWolves(),world.getHouse().getLocation());
-		red.update(1);
+		red.update(.01);
 	}
 
 	void processOneEvent(World & world, Wolf & wolf) { 
@@ -34,7 +34,7 @@ namespace {
 		}
 
 		wolf.chase(world.getRed().getLocation());
-		wolf.update(1);
+		wolf.update(.01);
 	}
 }
 
