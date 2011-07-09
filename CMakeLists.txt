@@ -9,6 +9,7 @@ find_package(GLUT REQUIRED)
 add_library (main
 	display.cpp display.h
 	input.cpp input.h
+	world.cpp world.h
 )
 
 add_subdirectory(graphics)

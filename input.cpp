@@ -71,7 +71,7 @@ namespace input {
 	}
 
 	void mouse(int button, int state, int x, int y) {
-
+		
 	}
 
 	void register_callbacks(void) {

@@ -4,17 +4,23 @@
 #include <GL/gl.h>
 #include <GL/glut.h>
 #include "input.h"
+#include "world.h"
 
 Point eye;
 Point look;
 float heading = 0.0, speed=0.2;
 float text_size=0.01;
+World world;
 
 void display(void) {
   	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	/*
 	glBegin(GL_POINTS);
 	glColor3f(1.0,1.0,1.0); glVertex3f(0.0, 0.0, 0.0);
 	glEnd();
+	*/
+
+	world.display();
 
   	glutSwapBuffers();
 }
