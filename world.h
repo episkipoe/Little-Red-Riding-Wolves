@@ -30,7 +30,8 @@ class World {
 		void handleKeyboard(unsigned char key, int x, int y);
 	
 		void addWolf(const Wolf & newWolf) { wolves.push_back(newWolf); }
-		//TODO vector<Point> getWolfLocations() 
+		vector<Wolf> & getWolves() { return wolves; }
+		Red getRed() { return red; }
 	
 		bool overlapsWithHouse(Point location) { return house.getLocation().inRange(location, 5); }		
 		bool overlapsWithRed(Point location) { return red.getLocation().inRange(location, 5); }		

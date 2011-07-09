@@ -9,6 +9,7 @@ class Red : public Drawable {
 	public:
 		Red () {
 			resetLocation();
+			speed=1;
 		}
 
 		void draw() {

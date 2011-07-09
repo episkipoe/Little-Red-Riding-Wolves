@@ -18,12 +18,13 @@ namespace {
 
 		if(world.phase != AI_RED) { return ; }
 
-		//TODO head towards house
+		red.chase(world.getWolves());
+		red.update(1);
 	}
 
 	void processOneEvent(World & world, Wolf & wolf) { 
 		if(world.phase == PLACE_WOLF) return;
-		//TODO head towards Red
+
 		if(world.overlapsWithRed(wolf.getLocation())) {
 			if(world.phase == AI_RED) {
 				world.switchPhase(PLAYER_RED);
@@ -31,6 +32,9 @@ namespace {
 				world.playerLoses("You have been eaten.");
 			}
 		}
+
+		wolf.chase(world.getRed().getLocation());
+		wolf.update(1);
 	}
 }
 
