@@ -66,6 +66,7 @@ void initialize_display(void) {
 	eye.z=100;
 
 	loadImages();
+	world.genWorld();
 	reshape(width,height);
 }
 
