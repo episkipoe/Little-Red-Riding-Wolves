@@ -8,7 +8,6 @@ class Wolf : public Drawable {
 		Wolf (Point loc)  { 
 			location = loc;
 			speed=30;
-			radius = 4;
 			viewDistance = 3;//Wolves can see 3 times their raidus away from themselves
 		}
 
@@ -18,6 +17,8 @@ class Wolf : public Drawable {
 #endif
 			draw_texture("wolf", location, 10, 10);
 		}		
+
+		float getRadius() { return 4; }
 
 		void chase(Point red) {
 			moveVector.x=red.x-location.x;

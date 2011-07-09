@@ -4,9 +4,9 @@ class House: public Drawable {
 		House() {
 			location.x = -60;
 			location.y = 80;
-            radius = 30;//TODO:tweak to fit sprite
-            viewDistance = 1;//can only see things it touches
+			viewDistance = 1;//can only see things it touches
 		}
+		float getRadius() { return 30; }
 
 		void draw() {
 			draw_texture("house", location, 60, 60);

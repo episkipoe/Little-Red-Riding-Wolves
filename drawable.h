@@ -8,13 +8,14 @@
 class Drawable {
 	public:
 		virtual void draw() = 0;
+		virtual float getRadius() = 0;
 
 		Point getLocation() { return location; }
 
 		virtual void update(float) {};
         
 		bool touches(Drawable *target) {
-			if(location.distance(target->location) < (target->radius + radius)) {
+			if(location.distance(target->location) < (target->getRadius() + getRadius())) {
 				return true;
 			}else{
 				return false;
@@ -22,21 +23,20 @@ class Drawable {
 		};
 
 		bool sees(Drawable *target) {
-			if(location.distance(target->location) < target->radius + radius * viewDistance) {
+			if(location.distance(target->location) < target->getRadius() + getRadius() * viewDistance) {
 				return true;
 			}else{
 				return false;
 			}
 		};
 
-        void moveBack() {
-            location = lastLoc;
-        }
+		void moveBack() {
+			location = lastLoc;
+		}
 
 	protected:
 		Point location;
 		Point lastLoc;
-		float radius;
 		float viewDistance;
 };
 

@@ -13,7 +13,7 @@ World world;
 #define GAME_TIMER 2
 void timer(int val) {
 	if(val==DISPLAY_TIMER) {
-		glutTimerFunc(100,  timer, val);  
+		glutTimerFunc(25,  timer, val);  
 		input::timer();
 		glutPostRedisplay();
 		return;

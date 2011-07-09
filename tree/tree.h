@@ -10,6 +10,7 @@ class Tree : public Drawable {
 			glColor3f(0.8,0.8,0.8);
 			draw_texture("tree", location, 10, 10);
 		}
+		float getRadius() { return 4; }
 };
 
 #endif

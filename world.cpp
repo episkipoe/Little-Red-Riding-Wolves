@@ -27,40 +27,44 @@ void World::processOneEvent() {
 }
 
 void World::processRedEvent() { 
-    if (red.touches(&house)) {
-        if(phase == PLAYER_RED)  playerWins();
-        else if(phase == AI_RED) playerLoses("Robot red has reached the house");
+	if (red.touches(&house)) {
+		if(phase == PLAYER_RED)  playerWins();
+		else if(phase == AI_RED) playerLoses("Robot red has reached the house");
 	}
 
-    for(size_t i=0; i<obstacles.size(); i++)
-        if(red.sees(obstacles[i]))
-            red.addAvoidancePoint(obstacles[i]->getLocation());
+	for(size_t i=0; i<obstacles.size(); i++)
+		if(red.sees(obstacles[i]))
+			red.addAvoidancePoint(obstacles[i]->getLocation());
 
-    if(phase == PLAYER_RED) red.update(.01);
-    if(phase == AI_RED) { 
-        red.chase(wolves,house.getLocation());
-        red.update(.01);
-    }
+	if(phase == PLAYER_RED) {
+		red.update(.01);
+		for(size_t i=0; i<obstacles.size(); i++)
+			if(red.touches(obstacles[i])) {
+				red.moveBack();
+			}
+	}
+	if(phase == AI_RED) { 
+		red.chase(wolves,house.getLocation());
+		red.update(.01);
+	}
 }
 
 void World::processWolfEvent() { 
     if(phase == PLACE_WOLF) return;
 
     for(size_t i=0; i<wolves.size(); i++) {
-        Wolf wolf = wolves[i];
+        /*for(size_t j=0; j<obstacles.size(); j++)
+            if(wolves[i].touches(obstacles[j]))
+                wolves[i].moveBack();
+	*/
 
-        if(wolf.touches(&red)) {
-            if(phase == AI_RED)          switchPhase(PLAYER_RED);
-            else if(phase == PLAYER_RED) playerLoses("You have been eaten.");
-		}
+	if(wolves[i].touches(&red)) {
+		if(phase == AI_RED)          switchPhase(PLAYER_RED);
+		else if(phase == PLAYER_RED) playerLoses("You have been eaten.");
+	}
 
-
-        for(size_t i=0; i<obstacles.size(); i++)
-            if(wolf.touches(obstacles[i]))
-                wolf.moveBack();
-
-        wolf.chase(red.getLocation());
-        wolf.update(.01);
+        wolves[i].chase(red.getLocation());
+        wolves[i].update(.01);
     }
 }
 
@@ -158,8 +162,8 @@ void World::handleKeyboard(unsigned char key, int x, int y) {
 
 void World::genWorld() {
 	srand(389209);
-	for (int i=0; i<40; i++) {
-		Point pos(rand()%201-100,rand()%201-100);
+	for (int i=0; i<60; i++) {
+		Point pos(rand()%401-200,rand()%401-200);
 		obstacles.push_back(new Tree(pos));
 	}
 	for (int i=-10; i<10; i++){
