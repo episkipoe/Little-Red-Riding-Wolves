@@ -37,8 +37,7 @@ struct Point  //stores a location
 		return acos(cosB);
 	}
 	void normalize() {
-		float max = (x>y) ? x : y;
-		max = (z>max) ? z : max;
+		float max = (fabs(x)>fabs(y)) ? fabs(x) : fabs(y);
 		x/=max;
 		y/=max;
 		z/=max;
