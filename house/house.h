@@ -7,7 +7,7 @@ class House: public Drawable {
 		}
 
 		void draw() {
-			draw_texture("house", location, 20);
+			draw_texture("house", location, 60);
 		}
 };
 

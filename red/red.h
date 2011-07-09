@@ -45,6 +45,8 @@ class Red : public Drawable {
 				} else {
 					beingChased=true; //ran out of path points. Set to beignChased so red will still try to get to house
 				}
+			} else {
+				follow(housePos);
 			}
 
 		}
