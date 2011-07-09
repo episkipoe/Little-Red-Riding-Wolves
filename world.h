@@ -22,6 +22,8 @@ class World {
 
 		void display();
 		void processOneEvent();
+		void processRedEvent();
+		void processWolfEvent();
 
 		void playerWins();
 		void playerLoses(const string & reason);
@@ -35,9 +37,6 @@ class World {
 		vector<Wolf> & getWolves() { return wolves; }
 		Red getRed() { return red; }
 		House getHouse() {return house; }
-	
-		bool overlapsWithHouse(Point location) { return house.getLocation().inRange(location, 35); }		
-		bool overlapsWithRed(Point location) { return red.getLocation().inRange(location, 5); }		
 
 	private:
 		std::string game_over_message;

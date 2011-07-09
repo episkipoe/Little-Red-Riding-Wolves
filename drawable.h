@@ -35,6 +35,8 @@ class Drawable {
 		Point lastLoc;
         float radius;
         float viewDistance;
+        float width;
+        float height;
 };
 
 #endif
