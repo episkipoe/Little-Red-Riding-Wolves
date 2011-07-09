@@ -25,6 +25,7 @@ class Red : public Drawable {
 		void resetLocation() {
 			location.x = 40;
 			location.y = location.z = 0;
+			lastLoc = location;
 		}
 
 		void chase(vector<Wolf>& wolvesVector, Point housePos) {
@@ -40,7 +41,13 @@ class Red : public Drawable {
 
 		}
 
+		void follow(Point followPoint) {
+			moveVector = followPoint + (location * -1);
+			moveVector.normalize();
+		}
+
 		void update(float frameTime) {
+			lastLoc = location;
 			location = location + moveVector * speed * frameTime;
 		}
 

@@ -28,6 +28,7 @@ class Wolf : public Drawable {
 		}
 
 		void update(float frameTime) {
+			lastLoc = location;
 			location = location + moveVector * speed * frameTime;
 		}
 
