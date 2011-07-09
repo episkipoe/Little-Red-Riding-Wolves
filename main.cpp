@@ -1,18 +1,29 @@
 #include <GL/glut.h>
 #include <vector>
+#include <time.h>
+#include "display.h"
+#include "input.h"
 
-void display(void)
-{
-  	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);          // clear screen
-  	gEye.setView();
-  	glutSwapBuffers();
+bool is_paused=false;
+
+#define MSG_TIMER 0
+#define DISPLAY_TIMER 1
+void timer(int val) {
+	if(val==DISPLAY_TIMER) {
+		glutTimerFunc(100,  timer, val);  
+		input::timer();
+		glutPostRedisplay();
+		return;
+	} 
+	glutTimerFunc(200,  timer, val);  
+	if(is_paused) return;
 }
+
 
 int main(int argc, char** argv) //finaly the main function
 {
 	//initialise glut
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH) ;
-	glutInitWindowSize(screenWidth,screenHeight) ;
 
     #if defined(_WIN32)
         srand(time(NULL));
@@ -21,9 +32,9 @@ int main(int argc, char** argv) //finaly the main function
     #endif
 
 	glutInit(&argc,argv);
-	glutCreateWindow("Red Riding Wolves") ;
-	input::register_callbacks();
-	glutIgnoreKeyRepeat(1);
+	initialize_display();
+	glutTimerFunc(200,  timer, MSG_TIMER);  
+	glutTimerFunc(100, timer, DISPLAY_TIMER);  
 	glutMainLoop() ;
 
 	return 0;

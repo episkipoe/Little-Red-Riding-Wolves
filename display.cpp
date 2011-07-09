@@ -1,9 +1,9 @@
 #include <vector>
 #include <common/point.h>
 #include <graphics/graphics.h>
+#include <GL/gl.h>
+#include <GL/glut.h>
 #include "input.h"
-#include "manage_agents.h"
-#include "announcements.h"
 
 Point eye;
 Point look;
@@ -40,7 +40,7 @@ void initialize_display(void) {
 	int width=640, height=480;
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH) ;
 	glutInitWindowSize(width,height) ;
-	glutCreateWindow("The World") ;
+	glutCreateWindow("Little Red Riding Wolves") ;
 	/*callbacks*/
 	glutDisplayFunc(display) ;
 	glutReshapeFunc(reshape) ;
@@ -92,7 +92,9 @@ void move_eye(bool left, bool right, bool up, bool down, bool in, bool out) {
 void reset_eye(void) {
 	eye.x=eye.y=0.0; 
 	eye.z=100.0;
-	look.x=look.y=look.z=0.0;
+	look.x=0.0;
+	look.y=10.0;
+	look.z=0.0;
 	set_eye();
 }
 

@@ -2,7 +2,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "display.h"
-#include "manage_agents.h"
 
 extern bool is_paused;
 
@@ -67,12 +66,12 @@ namespace input {
 			case 'p': is_paused = !is_paused;
 				break;
 			case 'q':
-				//kill_all_agents();
 				exit(0);
 		}
 	}
 
 	void mouse(int button, int state, int x, int y) {
+
 	}
 
 	void register_callbacks(void) {

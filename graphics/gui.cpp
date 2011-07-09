@@ -1,5 +1,6 @@
 #include "graphics.h"
 #include "text.h"
+#include <GL/gl.h>
 
 using namespace std;
 
@@ -21,5 +22,5 @@ void drawButton(float bottom, float left, float width, float height, string capt
 
 	glColor3f(1,1,1);
 
-	drawText(left + 1.0, bottom + (height / 2), caption);
+	//drawText(left + 1.0, bottom + (height / 2), caption);
 }

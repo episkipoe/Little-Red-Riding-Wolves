@@ -1,4 +1,4 @@
 add_library(graphics
-	gui.cpp gui.h
+	gui.cpp 
 	text.cpp text.h
 )
