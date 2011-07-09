@@ -36,6 +36,13 @@ struct Point  //stores a location
 		//printf("\t\ta %g b %g c %g : %g / %g\n", a, b, c, (pow(a,2) + pow(c,2) - pow(b,2)), (2.0 * a * c));
 		return acos(cosB);
 	}
+	float angle(Point other) {
+		return atan((other.y-y)/(other.x-x));
+	}
+	void addVector(float angle, float magnitude) {
+		x += cos(angle) * magnitude;
+		y += sin(angle) * magnitude;
+	}
 	void normalize() {
 		float max = (fabs(x)>fabs(y)) ? fabs(x) : fabs(y);
 		x/=max;

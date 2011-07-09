@@ -31,20 +31,31 @@ class Red : public Drawable {
 
 		void chase(vector<Wolf>& wolvesVector, Point housePos) {
 			if (beingChased) { //beign chased. Run away from wolves, avoid objects, target house
-				for (unsigned int i=0; i<wolvesVector.size(); i++){
+				moveVector.x=0;
+				moveVector.y=0;
+				//first, factor in all the wolves
+				for (size_t i=0; i<wolvesVector.size(); i++){
 					Point wolfPos = wolvesVector[i].getLocation();
-					moveVector = moveVector + (location + wolfPos * -1);
+					moveVector.addVector(location.angle(wolfPos),-30.0/location.distance(wolfPos));
 				}
 
-				moveVector = moveVector + (housePos + location * -1)*3;
+				//next, factor in all the avoidance points
+				for (size_t i=0; i<avoidanceList.size(); i++){
+					moveVector.addVector(location.angle(avoidanceList[i]),pow(20.0/location.distance(avoidanceList[i]),3));
+				}
+
+				//finally, add the house pull
+				moveVector.addVector(location.angle(housePos),pow(50.0/location.distance(housePos),2));
 
 				moveVector.normalize();
+
 			} else if (pathPoints.size() > 0) { //following the path
+
 				if (location.distance(pathPoints[pathPosition])<15) pathPosition++; //advance the pathPoints list if at the corner
 				if (pathPosition<pathPoints.size()) {
 					follow(pathPoints[pathPosition]);
 				} else {
-					beingChased=true; //ran out of path points. Set to beignChased so red will still try to get to house
+					beingChased=true; //ran out of path points. Set to beingChased so red will still try to get to house
 				}
 			} else {
 				follow(housePos);
