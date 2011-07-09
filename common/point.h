@@ -44,10 +44,11 @@ struct Point  //stores a location
 		y += sin(angle) * magnitude;
 	}
 	void normalize() {
-		float max = (fabs(x)>fabs(y)) ? fabs(x) : fabs(y);
-		x/=max;
-		y/=max;
-		z/=max;
+		float dx = (sqrt(pow(x,2)+pow(y,2)+pow(z,2)));
+		if(fabs(dx)<1e-5) return;
+		x/=dx;
+		y/=dx;
+		z/=dx;
 	}
 	bool operator==(const Point &rhs) {
 		return ((x == rhs.x) &&
