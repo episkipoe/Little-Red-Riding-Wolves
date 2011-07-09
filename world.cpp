@@ -16,6 +16,7 @@ namespace {
 			}
 		}
 
+		if(world.phase == PLAYER_RED) { red.update(.01); }
 		if(world.phase != AI_RED) { return ; }
 
 		red.chase(world.getWolves(),world.getHouse().getLocation());
@@ -111,10 +112,19 @@ void World::placeObject(int button, int x, int y) {
 	}
 }
 
+void World::guideRed(int button, int x, int y) {
+	Point clicked = screenToWorld(x,y);
+	if (button == GLUT_LEFT_BUTTON) {
+		red.follow(clicked);
+	} else {
+	}
+}
+
 void World::handleMouse(int button, int state, int x, int y) {
 	if(state==GLUT_DOWN) return;
 
 	if(phase == PLACE_WOLF) placeObject(button, x, y); 
+	if(phase == PLAYER_RED) guideRed(button, x, y);
 
 }
 
