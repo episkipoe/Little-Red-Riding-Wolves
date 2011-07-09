@@ -18,7 +18,7 @@ namespace {
 
 		if(world.phase != AI_RED) { return ; }
 
-		red.chase(world.getWolves());
+		red.chase(world.getWolves(),world.getHouse().getLocation());
 		red.update(1);
 	}
 

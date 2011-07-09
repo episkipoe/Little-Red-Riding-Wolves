@@ -32,6 +32,7 @@ class World {
 		void addWolf(const Wolf & newWolf) { wolves.push_back(newWolf); }
 		vector<Wolf> & getWolves() { return wolves; }
 		Red getRed() { return red; }
+		House getHouse() {return house; }
 	
 		bool overlapsWithHouse(Point location) { return house.getLocation().inRange(location, 5); }		
 		bool overlapsWithRed(Point location) { return red.getLocation().inRange(location, 5); }		

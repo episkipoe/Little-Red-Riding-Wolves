@@ -27,13 +27,14 @@ class Red : public Drawable {
 			location.y = location.z = 0;
 		}
 
-		void chase(vector<Wolf>& wolvesVector) {
+		void chase(vector<Wolf>& wolvesVector, Point housePos) {
 
 			for (unsigned int i=0; i<wolvesVector.size(); i++){
 				Point wolfPos = wolvesVector[i].getLocation();
-				moveVector.x += wolfPos.x - location.x;
-				moveVector.y += wolfPos.y - location.y;
+				moveVector = moveVector + (location + wolfPos * -1);
 			}
+
+			moveVector = moveVector + (housePos + location * -1)*3;
 
 			moveVector.normalize();
 
