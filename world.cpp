@@ -97,6 +97,9 @@ void World::handleKeyboard(unsigned char key, int x, int y) {
 	switch(key) {
 		case ' ':
 			if(phase==PLACE_WOLF) switchPhase(AI_RED);
+			if(phase==AI_RED) switchPhase(PLAYER_RED);
+			if(phase==PLAYER_RED) switchPhase(GAME_OVER);
+			if(phase==GAME_OVER) switchPhase(PLACE_WOLF);
 	}
 }
 
