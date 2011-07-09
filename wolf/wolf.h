@@ -14,7 +14,7 @@ class Wolf : public Drawable {
 #ifdef DEBUG
 			printf("drawing at %g, %g\n", location.x, location.y);
 #endif
-			draw_texture("wolf", location, 10);
+            draw_texture("wolf", location, 10);
 		}		
 
 		void chase(Point red) {
