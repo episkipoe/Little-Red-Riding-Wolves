@@ -1,4 +1,3 @@
-#include <GL/openglut.h>
 #include "string.h"
 #include "graphics.h"
 #include "text.h"
@@ -14,7 +13,7 @@ void drawText(float x, float y, float z, const std::string & text, const Font & 
 
 	void *fontID=GLUT_STROKE_ROMAN;
 
-	if(font.outline) {
+	/*if(font.outline) {
 		double y0=0.0,y1=glutStrokeHeight(fontID);
 		double x0=0.0,x1=0.0;
 		for(size_t i = 0; i < text.length(); ++i) x1+=glutStrokeWidth(fontID,text[i]);
@@ -26,7 +25,7 @@ void drawText(float x, float y, float z, const std::string & text, const Font & 
 			glVertex2f(x1,y0); glVertex2f(x1,y1);
 		}
 		glEnd();
-	}
+	}*/
 
   	for(size_t i = 0; i < text.length(); ++i) {
      		glutStrokeCharacter(fontID, text[i]);
@@ -35,20 +34,22 @@ void drawText(float x, float y, float z, const std::string & text, const Font & 
 }
 
 Rect boundingBox(const std::string & text, const Font & font) {
+	Rect rect;
+	return rect;
+/*
   	glPushMatrix();
   	glScalef(font.size, font.size, font.size);
 
 	void *fontID=GLUT_STROKE_ROMAN;
-
 	double y0=0.0,y1=glutStrokeHeight(fontID);
 	double x0=0.0,x1=0.0;
-	for(size_t i = 0; i < text.length(); ++i) x1+=glutStrokeWidth(fontID,text[i]);
 
+	for(size_t i = 0; i < text.length(); ++i) x1+=glutStrokeWidth(fontID,text[i]);
 	Rect rect;
 	rect.fromPoints(Point(x0, y0), Point(x1, y1));
 	rect.scale(font.size);
 
   	glPopMatrix();
-
 	return rect;
+*/
 }
