@@ -1,2 +1,8 @@
 *.swp
 *.swo
+CMakeFiles/
+CMakeCache.txt
+Makefile
+cmake_install.cmake
+*.a
+wolves

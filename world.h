@@ -6,23 +6,38 @@
 #include <wolf/wolf.h>
 #include <house/house.h>
 
+enum Phase {PLACE_WOLF, AI_RED, PLAYER_RED, GAME_OVER};
+
+/**
+ *  The world manages a number of Drawables
+*/
 class World {
 	public:
 		World() { 
 			phase = PLACE_WOLF;
 		}
 
-		enum Phase {PLACE_WOLF, AI_RED, PLAYER_RED};
+		Phase phase;
+		void switchPhase(Phase new_phase);
+
 		void display();
-		
+		void processOneEvent();
+
+		void playerWins();
+		void playerLoses(const string & reason);
+	
 		void addWolf(const Wolf & newWolf) { wolves.push_back(newWolf); }
 		//TODO vector<Point> getWolfLocations() 
+	
+		bool overlapsWithHouse(Point location) { return house.getLocation().inRange(location, 5); }		
+		bool overlapsWithRed(Point location) { return red.getLocation().inRange(location, 5); }		
 
 	private:
-		Phase phase;
+		std::string game_over_message;
 
 		//things in the world
 		std::vector<Wolf> wolves;
+		std::vector<Drawable> obstacles;
 		Red red;	
 		House house;
 };

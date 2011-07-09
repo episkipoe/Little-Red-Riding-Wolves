@@ -3,11 +3,14 @@
 #include <time.h>
 #include "display.h"
 #include "input.h"
+#include "world.h"
 
 bool is_paused=false;
+World world;
 
 #define MSG_TIMER 0
 #define DISPLAY_TIMER 1
+#define GAME_TIMER 2
 void timer(int val) {
 	if(val==DISPLAY_TIMER) {
 		glutTimerFunc(100,  timer, val);  
@@ -15,6 +18,14 @@ void timer(int val) {
 		glutPostRedisplay();
 		return;
 	} 
+
+	if(val==GAME_TIMER) {
+		glutTimerFunc(100,  timer, val);  
+		world.processOneEvent();
+		glutPostRedisplay();
+		return;
+	} 
+
 	glutTimerFunc(200,  timer, val);  
 	if(is_paused) return;
 }
@@ -35,6 +46,7 @@ int main(int argc, char** argv) //finaly the main function
 	initialize_display();
 	glutTimerFunc(200,  timer, MSG_TIMER);  
 	glutTimerFunc(100, timer, DISPLAY_TIMER);  
+	glutTimerFunc(100, timer, GAME_TIMER);  
 	glutMainLoop() ;
 
 	return 0;

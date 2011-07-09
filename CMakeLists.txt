@@ -12,7 +12,13 @@ add_library (main
 	world.cpp world.h
 )
 
+add_library (agents
+	red/red.cpp
+	wolf/wolf.cpp
+)
+
 add_subdirectory(graphics)
+add_subdirectory(common)
 
 add_executable(wolves
 	main.cpp
@@ -20,7 +26,9 @@ add_executable(wolves
 
 target_link_libraries(wolves 
 	main
+	agents
 	graphics
+	common
 	${GLUT_LIBRARY} 
 	${OPENGL_LIBRARY}
 	${GLU_LIBRARY} 

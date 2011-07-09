@@ -16,6 +16,8 @@ class Wolf : public Drawable {
 			glVertex3f(location.x, location.y, location.z);
 			glEnd();
 		}		
+
+		
 };
 
 #endif

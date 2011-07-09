@@ -12,6 +12,6 @@ class House: public Drawable {
 			glBegin(GL_POINTS);
 			glVertex3f(location.x, location.y, location.z);
 			glEnd();
-		}	
+		}
 };
 

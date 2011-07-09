@@ -10,7 +10,7 @@ Point eye;
 Point look;
 float heading = 0.0, speed=0.2;
 float text_size=0.01;
-World world;
+extern World world;
 
 void display(void) {
   	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -52,7 +52,7 @@ void initialize_display(void) {
 	glutReshapeFunc(reshape) ;
 	input::register_callbacks();
 	/*get ready to draw*/
-	glClearColor(0.0f,0.0f,0.0f,1.0f); 
+	glClearColor(0.3f,1.0f,0.3f,1.0f); 
 	glEnable(GL_DEPTH_TEST);
   	glDepthFunc(GL_LESS);
   	glPointSize(4.0);
