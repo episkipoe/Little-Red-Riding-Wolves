@@ -11,6 +11,7 @@ find_package(OpenGL REQUIRED)
 
 find_package(PNG REQUIRED)
 include_directories(${PNG_INCLUDE_DIR})
+include_directories(.)
 
 add_library (main
 	display.cpp display.h

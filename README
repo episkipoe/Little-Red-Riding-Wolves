@@ -1,0 +1,8 @@
+Dependencies for Building, Ubuntu package names:
+cmake
+freeglut3-dev
+libxmu-dev
+libxi-dev
+
+Build with:
+cmake /path/to/checkout
