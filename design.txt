@@ -1,4 +1,9 @@
-Little Red Riding Wolves
+Summer Game Jam 2011
+Theme:	Twice Upon a Time
+Game:	Little Red Riding Wolves
+	First you must build an army of wolves to thwart the AI Red.
+	After your minions have destroyed her then you must avoid that same army in order to reach the house yourself.
+	Are you smarter than Mecha Red Riding Hood?
 
 Iteration 0 / Basic Game Infrastructure
 
@@ -19,8 +24,11 @@ Iteration 0 / Basic Game Infrastructure
 		If Red reaches the house the Player wins
 
 
-Iteration 1 / Improvements
+Iteration 1 / Basic Improvements
 	
 	World is populated by trees which are obstacles for Red and wolves
+	Smarter Red / Wolf AI
+
+Iteration 2 / Advanced Improvements
+
 	World has a path that AI Red attempts to follow
-	Improvements to Red / Wolf AI

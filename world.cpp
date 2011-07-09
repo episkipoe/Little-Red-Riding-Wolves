@@ -1,7 +1,12 @@
 #include <graphics/text.h>
+#include <GL/glut.h>
+#include <tree/tree.h>
 #include "world.h"
 
+extern Point look;
+
 namespace {
+	//TODO:  boundaries on the world
 	void processOneEvent(World & world, Red & red) { 
 		if (world.overlapsWithHouse(red.getLocation())) {
 			if(world.phase == PLAYER_RED) {
@@ -30,16 +35,20 @@ namespace {
 }
 
 void World::switchPhase(Phase new_phase) {
+	//playerLoses("Robot red has reached the house");
 	phase = new_phase;
-	if(new_phase == PLAYER_RED) {
-		//TODO: load player wolf placement
+	if(new_phase == AI_RED) {
+		saved_wolves = wolves;
+	} else if(new_phase == PLAYER_RED) {
+		red.resetLocation();
+		wolves = saved_wolves;
 	}
 }
 
 void World::display() {
 	house.draw();
 	for(size_t i=0; i<obstacles.size(); i++) {
-		obstacles[i].draw();
+		obstacles[i]->draw();
 	}
 	for(size_t i=0; i<wolves.size(); i++) {
 		wolves[i].draw();
@@ -71,6 +80,23 @@ void World::playerLoses(const string & reason) {
 
 void World::handleMouse(int button, int state, int x, int y) {
 	if(phase != PLACE_WOLF) return; 
-	Wolf wolf(x, y);
-	addWolf(wolf);
+	if(state==GLUT_DOWN) return;
+
+	//TODO  translate scr coords to world coords
+	//Make sure space is empty
+
+	if (button == GLUT_LEFT_BUTTON) {
+		Wolf wolf(look);
+		addWolf(wolf);
+	} else {
+		obstacles.push_back(new Tree(look));
+	}
 }
+
+void World::handleKeyboard(unsigned char key, int x, int y) {
+	switch(key) {
+		case ' ':
+			if(phase==PLACE_WOLF) switchPhase(AI_RED);
+	}
+}
+

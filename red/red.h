@@ -5,6 +5,10 @@
 #include <images/textures.h>
 class Red : public Drawable {
 	public:
+		Red () {
+			resetLocation();
+		}
+
 		void draw() {
 			int size = 2;
 			glColor3f(1,0,0);
@@ -13,9 +17,11 @@ class Red : public Drawable {
 				glVertex3f(location.x+size, location.y-size, location.z);
 				glVertex3f(location.x, location.y+size, location.z);
 			glEnd();
+		}
 
-			draw_texture("tree", location);
-
+		void resetLocation() {
+			location.x = 40;
+			location.y = location.z = 0;
 		}
 };
 

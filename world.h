@@ -27,6 +27,7 @@ class World {
 		void playerLoses(const string & reason);
 
 		void handleMouse(int button, int state, int x, int y);
+		void handleKeyboard(unsigned char key, int x, int y);
 	
 		void addWolf(const Wolf & newWolf) { wolves.push_back(newWolf); }
 		//TODO vector<Point> getWolfLocations() 
@@ -39,7 +40,8 @@ class World {
 
 		//things in the world
 		std::vector<Wolf> wolves;
-		std::vector<Drawable> obstacles;
+		std::vector<Wolf> saved_wolves;
+		std::vector<Drawable *> obstacles;
 		Red red;	
 		House house;
 };

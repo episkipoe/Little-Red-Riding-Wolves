@@ -1,8 +1,11 @@
 #ifndef DRAWABLE_H
 #define DRAWABLE_H
 
-#include <common/point.h>
 #include <GL/gl.h>
+#include <GL/glut.h>
+#include <common/point.h>
+#include <images/textures.h>
+
 
 class Drawable {
 	public:

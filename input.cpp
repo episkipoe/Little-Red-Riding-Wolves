@@ -69,6 +69,8 @@ namespace input {
 				break;
 			case 'q':
 				exit(0);
+			default:
+				world.handleKeyboard(key, x, y);
 		}
 	}
 

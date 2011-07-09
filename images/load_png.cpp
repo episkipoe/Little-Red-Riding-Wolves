@@ -14,7 +14,7 @@ using namespace std;
 struct Image {
 	unsigned long width;
 	unsigned long height;
-	GLubyte *outData;
+	GLubyte *data;
 	bool hasAlpha;
 };
 
@@ -31,7 +31,6 @@ bool loadPngImage(const char *name, Image & image) {
     png_structp png_ptr;
     png_infop info_ptr;
     unsigned int sig_read = 0;
-    int color_type, interlace_type;
     FILE *fp;
 
     if ((fp = fopen(name, "rb")) == NULL)
@@ -129,16 +128,15 @@ bool loadPngImage(const char *name, Image & image) {
             return false;
     }
     unsigned int row_bytes = png_get_rowbytes(png_ptr, info_ptr);
-printf("load %i * %ui\n", row_bytes, image.height);
-    image.outData = (unsigned char*) malloc(row_bytes * image.height);
+    image.data = (unsigned char*) malloc(row_bytes * image.height);
 
     png_bytepp row_pointers = png_get_rows(png_ptr, info_ptr);
 
-    for (int i = 0; i < image.height; i++) {
+    for (size_t i = 0; i < image.height; i++) {
         // note that png is ordered top to
         // bottom, but OpenGL expect it bottom to top
         // so the order or swapped
-        memcpy(image.outData+(row_bytes * (image.height-1-i)), row_pointers[i], row_bytes);
+        memcpy(image.data+(row_bytes * (image.height-1-i)), row_pointers[i], row_bytes);
     }
 
     /* Clean up after the read,
@@ -159,24 +157,31 @@ GLuint loadTexture(const string & file_name) {
 		cout << "Failed to load " <<file_name<<endl;	
 		return 0;
 	}
-	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+	glGenTextures(1, &handle);
+	glBindTexture(GL_TEXTURE_2D, handle);
+
+	//glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 	glTexImage2D(GL_TEXTURE_2D, 0, image.hasAlpha ? 4 : 3, image.width, image.height, 
-		0, image.hasAlpha ? GL_RGBA : GL_RGB, GL_UNSIGNED_BYTE, &handle);
+		0, image.hasAlpha ? GL_RGBA : GL_RGB, GL_UNSIGNED_BYTE, image.data);
 
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+
+	return handle;
 }
 
 void loadImages() {
-//	name_to_texture["tree"] = loadTexture("images/tree01.png");
+	name_to_texture["tree"] = loadTexture("images/tree01.png");
 }
 
-void draw_texture(std::string name, Point location) {
+void draw_texture(std::string name, Point location, float size) {
+	glEnable( GL_TEXTURE_2D );
 	glBindTexture( GL_TEXTURE_2D, get_texture(name) );
 	glPushMatrix();
 		glTranslatef(location.x, location.y, 0);
+		glScalef(size, size, size);
 		glBegin( GL_QUADS );
 			glTexCoord2d(0.0,0.0); glVertex2d(0.0,0.0);
 			glTexCoord2d(1.0,0.0); glVertex2d(1.0,0.0);
@@ -184,5 +189,6 @@ void draw_texture(std::string name, Point location) {
 			glTexCoord2d(0.0,1.0); glVertex2d(0.0,1.0);
 		glEnd();
 	glPopMatrix();
+	glDisable( GL_TEXTURE_2D );
 }
 

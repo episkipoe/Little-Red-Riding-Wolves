@@ -20,8 +20,8 @@ add_library (main
 )
 
 add_library (agents
-	red/red.cpp
-	wolf/wolf.cpp
+	red/red.cpp red/red.h
+	wolf/wolf.cpp wolf/wolf.h
 )
 
 add_subdirectory(graphics)
