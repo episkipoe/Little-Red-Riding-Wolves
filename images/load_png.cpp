@@ -177,6 +177,7 @@ void loadImages() {
 }
 
 void draw_texture(std::string name, Point location, float size) {
+	glColor4f(1,1,1,1);
 	glEnable( GL_TEXTURE_2D );
 	glBindTexture( GL_TEXTURE_2D, get_texture(name) );
 	glPushMatrix();
