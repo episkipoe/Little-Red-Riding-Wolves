@@ -183,10 +183,10 @@ void draw_texture(std::string name, Point location, float size) {
 		glTranslatef(location.x, location.y, 0);
 		glScalef(size, size, size);
 		glBegin( GL_QUADS );
-			glTexCoord2d(0.0,0.0); glVertex2d(0.0,0.0);
-			glTexCoord2d(1.0,0.0); glVertex2d(1.0,0.0);
-			glTexCoord2d(1.0,1.0); glVertex2d(1.0,1.0);
-			glTexCoord2d(0.0,1.0); glVertex2d(0.0,1.0);
+			glTexCoord2d(0.0,0.0); glVertex2d(-0.5,-0.5);
+			glTexCoord2d(1.0,0.0); glVertex2d(.5,-0.5);
+			glTexCoord2d(1.0,1.0); glVertex2d(.5,.5);
+			glTexCoord2d(0.0,1.0); glVertex2d(-0.5,.5);
 		glEnd();
 	glPopMatrix();
 	glDisable( GL_TEXTURE_2D );
