@@ -37,7 +37,7 @@ struct Point  //stores a location
 		return acos(cosB);
 	}
 	float angle(Point other) {
-		return atan((other.y-y)/(other.x-x));
+		return atan2((other.y-y),(other.x-x));
 	}
 	void addVector(float angle, float magnitude) {
 		x += cos(angle) * magnitude;

@@ -36,16 +36,16 @@ class Red : public Drawable {
 				//first, factor in all the wolves
 				for (size_t i=0; i<wolvesVector.size(); i++){
 					Point wolfPos = wolvesVector[i].getLocation();
-					moveVector.addVector(location.angle(wolfPos),15.0/location.distance(wolfPos));
+					moveVector.addVector(location.angle(wolfPos),-5.0/location.distance(wolfPos));
 					//printf("angle: %g\n", location.angle(wolfPos));
 				}
 				//next, factor in all the avoidance points
 				for (size_t i=0; i<avoidanceList.size(); i++){
-					moveVector.addVector(location.angle(avoidanceList[i]),pow(20.0/location.distance(avoidanceList[i]),3));
+					moveVector.addVector(location.angle(avoidanceList[i]),pow(-20.0/location.distance(avoidanceList[i]),3));
 				}
 
 				//finally, add the house pull
-				moveVector.addVector(location.angle(housePos),pow(50.0/location.distance(housePos),2));
+				moveVector.addVector(location.angle(housePos),pow(100.0/location.distance(housePos),3));
 				moveVector.normalize();
 				//moveVector.show();
 
