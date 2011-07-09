@@ -29,6 +29,10 @@ class Drawable {
 			}
 		};
 
+        void moveBack() {
+            location = lastLoc;
+        }
+
 	protected:
 		Point location;
 		Point lastLoc;

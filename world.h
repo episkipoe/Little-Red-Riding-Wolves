@@ -5,6 +5,7 @@
 #include <red/red.h>
 #include <wolf/wolf.h>
 #include <house/house.h>
+#include <path.h>
 
 enum Phase {PLACE_WOLF, AI_RED, PLAYER_RED, GAME_OVER};
 
@@ -22,8 +23,6 @@ class World {
 
 		void display();
 		void processOneEvent();
-		void processRedEvent();
-		void processWolfEvent();
 
 		void playerWins();
 		void playerLoses(const string & reason);
@@ -41,12 +40,17 @@ class World {
 		House getHouse() {return house; }
 
 	private:
+		void processRedEvent();
+		void processWolfEvent();
+		void collideObstacles();
+
 		std::string game_over_message;
 
 		//things in the world
 		std::vector<Wolf> wolves;
 		std::vector<Wolf> saved_wolves;
 		std::vector<Drawable *> obstacles;
+		std::vector<Path *> paths;
 		Red red;	
 		House house;
 
