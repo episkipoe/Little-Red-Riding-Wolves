@@ -19,6 +19,7 @@ class Wolf : public Drawable {
 			glBegin(GL_POINTS);
 			glVertex3f(location.x, location.y, location.z);
 			glEnd();
+            draw_texture("wolf", location, 10);
 		}		
 
 		void chase(Point red) {
