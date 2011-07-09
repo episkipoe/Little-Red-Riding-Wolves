@@ -1,12 +1,12 @@
 #include <common/point.h>
-class Path: public Drawable {
+class Fense: public Drawable {
 	public:
-		Path(Point loc) {
+		Fense(Point loc) {
 			location = loc;
 			radius = 10;//TODO:tweak to fit sprite
 		}
 
 		void draw() {
-			draw_texture("path", location, 10);
+			draw_texture("fence", location, 10);
 		}
 };

@@ -177,6 +177,7 @@ void loadImages() {
 	name_to_texture["house"] = loadTexture("images/GMHouse.png");
 	name_to_texture["red"] = loadTexture("images/RRH.png");
 	name_to_texture["path"] = loadTexture("images/path.png");
+	name_to_texture["fence"] = loadTexture("images/Fence.png");
 }
 
 void draw_texture(std::string name, Point location, float size) {
