@@ -10,7 +10,7 @@ void drawText(float x, float y, float z, const std::string & text, const Font & 
   	glPushMatrix();
   	glTranslatef(x, y, z);
   	glScalef(font.size, font.size, font.size);
-
+	glPointSize(1.0);
 	void *fontID=GLUT_STROKE_ROMAN;
 
 	/*if(font.outline) {
