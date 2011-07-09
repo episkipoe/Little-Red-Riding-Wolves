@@ -63,7 +63,7 @@ void World::processWolfEvent() {
 		else if(phase == PLAYER_RED) playerLoses("You have been eaten.");
 	}
 
-        wolves[i].chase(red.getLocation());
+        wolves[i].chase(red.getLocation(),wolves);
         wolves[i].update(.01);
     }
 }

@@ -11,6 +11,7 @@ class Drawable {
 		virtual float getRadius() = 0;
 
 		Point getLocation() { return location; }
+		void setLocation(Point pos) { location = pos; }
 
 		virtual void update(float) {};
         

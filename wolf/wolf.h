@@ -2,6 +2,7 @@
 #define WOLF_H
 
 #include <drawable.h>
+#include <vector>
 
 class Wolf : public Drawable {
 	public:
@@ -20,9 +21,15 @@ class Wolf : public Drawable {
 
 		float getRadius() { return 4; }
 
-		void chase(Point red) {
-			moveVector.x=red.x-location.x;
-			moveVector.y=red.y-location.y;
+		void chase(Point red, vector<Wolf>& wolvesVector) {
+			moveVector.x=(red.x-location.x)*2;
+			moveVector.y=(red.y-location.y)*2;
+			for (int i=0; i<wolvesVector.size(); i++) {
+				if (&wolvesVector[i] != this) {
+					Point wolfPos = wolvesVector[i].getLocation();
+					moveVector.addVector(location.angle(wolfPos),pow(-4.0/location.distance(wolfPos),3)/wolvesVector.size());
+				}
+			}
 			moveVector.normalize();
 		}
 
