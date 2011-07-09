@@ -7,6 +7,6 @@ class Path: public Drawable {
 		}
 
 		void draw() {
-			draw_texture("path", location, 10);
+			draw_texture("path", location, 10, 10);
 		}
 };

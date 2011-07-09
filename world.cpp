@@ -30,7 +30,7 @@ void World::processRedEvent() {
     if (red.touches(&house)) {
         if(phase == PLAYER_RED)  playerWins();
         else if(phase == AI_RED) playerLoses("Robot red has reached the house");
-    }
+	}
 
     for(size_t i=0; i<obstacles.size(); i++)
         if(red.sees(obstacles[i]))
@@ -49,17 +49,15 @@ void World::processWolfEvent() {
     for(size_t i=0; i<wolves.size(); i++) {
         Wolf wolf = wolves[i];
 
+        if(wolf.touches(&red)) {
+            if(phase == AI_RED)          switchPhase(PLAYER_RED);
+            else if(phase == PLAYER_RED) playerLoses("You have been eaten.");
+		}
+
+
         for(size_t i=0; i<obstacles.size(); i++)
             if(wolf.touches(obstacles[i]))
                 wolf.moveBack();
-
-        if(wolf.touches(&red)) {
-            if(phase == AI_RED) {
-                switchPhase(PLAYER_RED);
-            } else if(phase == PLAYER_RED) {
-                playerLoses("You have been eaten.");
-            }
-        }
 
         wolf.chase(red.getLocation());
         wolf.update(.01);
@@ -163,6 +161,17 @@ void World::genWorld() {
 	for (int i=0; i<40; i++) {
 		Point pos(rand()%201-100,rand()%201-100);
 		obstacles.push_back(new Tree(pos));
+	}
+	for (int i=-10; i<10; i++){
+		Point pos(i*10,-100);
+		obstacles.push_back(new Fence(pos));
+		pos.y=100;
+		obstacles.push_back(new Fence(pos));
+		pos.x=-100;
+		pos.y=i*10;
+		obstacles.push_back(new Fence(pos));
+		pos.x=100;
+		obstacles.push_back(new Fence(pos));
 	}
 }
 

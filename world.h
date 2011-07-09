@@ -6,6 +6,7 @@
 #include <wolf/wolf.h>
 #include <house/house.h>
 #include <path.h>
+#include <fence.h>
 
 enum Phase {PLACE_WOLF, AI_RED, PLAYER_RED, GAME_OVER};
 
@@ -42,7 +43,6 @@ class World {
 	private:
 		void processRedEvent();
 		void processWolfEvent();
-		void collideObstacles();
 
 		std::string game_over_message;
 
