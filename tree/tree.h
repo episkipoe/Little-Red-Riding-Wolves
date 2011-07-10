@@ -10,6 +10,8 @@ class Tree : public Drawable {
 			draw_texture("tree", location, 8, 18);
 		}
 		float getRadius() { return 6; }
+		virtual float getFearValue() { return 12; }
+
 };
 
 #endif

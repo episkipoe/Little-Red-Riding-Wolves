@@ -30,7 +30,7 @@ class Wolf : public Drawable {
 				if (&wolvesVector[i] != this) {
 					Point wolfPos = wolvesVector[i].getLocation();
 					if(location.distance(wolfPos) > 40) continue;
-					moveVector.addVector(location.angle(wolfPos),pow(-13.0/location.distance(wolfPos),3));
+					moveVector.addVector(location.angle(wolfPos),pow(-12.0/location.distance(wolfPos),3));
 				}
 			}
 			moveVector.normalize();

@@ -73,7 +73,9 @@ class Red : public Drawable {
 				avoidObstacles();
 
 				//finally, add the house pull
-				moveVector.addVector(location.angle(housePos),pow(150.0/location.distance(housePos),2));
+				if(!touching) {
+					moveVector.addVector(location.angle(housePos),pow(150.0/location.distance(housePos),2));
+				}
 				moveVector.normalize();
 				//moveVector.show();
 			} else if (pathPoints.size() > 0) { //following the path
@@ -122,11 +124,12 @@ class Red : public Drawable {
 		void beginChase() { beingChased=true; }
 		void eat() { alive = false; }
 		void stop() { moveVector.clear(); }
+		void setTouching(bool t) { touching = t; }
 
 		void setOnPath(bool isOnPath) { onPath = isOnPath; }
 
 		void update(float frameTime) {
-			if(!alive) resetLocation();
+			if(!alive) return;
 			lastLoc = location;
 			float movementSpeed = (onPath ? speed * 1.5 : speed);
 			location = location + moveVector * movementSpeed * frameTime;
@@ -139,6 +142,7 @@ class Red : public Drawable {
 private:
 	Point moveVector;
 	float speed;
+	bool touching;
 	bool onPath;
 	bool beingChased;
 	bool alive;

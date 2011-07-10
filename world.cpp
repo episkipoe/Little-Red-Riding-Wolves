@@ -35,7 +35,9 @@ void World::processRedEvent() {
 	if (red.touches(&house)) {
 		if(phase == PLAYER_RED)  playerWins();
 		if(phase == AI_RED) playerLoses("Robot red has reached the house");
+		return;
 	}
+	red.setTouching(false);
 
 	bool onPath = false;
 	for(size_t j=0; j<paths.size(); j++) {
@@ -52,7 +54,10 @@ void World::processRedEvent() {
 		}
 		if(red.touches(obstacles[i])) {
 			red.beginChase();
-			red.moveBack();
+			if(phase == PLAYER_RED) {
+				red.moveBack();
+			}
+			red.setTouching(true);
 		}
 	}
 
