@@ -4,7 +4,6 @@
 #include "input.h"
 #include "world.h"
 
-bool is_paused=false;
 World world;
 
 #define MSG_TIMER 0
@@ -26,7 +25,6 @@ void timer(int val) {
 	} 
 
 	glutTimerFunc(200,  timer, val);  
-	if(is_paused) return;
 }
 
 

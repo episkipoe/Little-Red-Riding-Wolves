@@ -17,6 +17,7 @@ class World {
 	public:
 		World() { 
 			phase = PLACE_WOLF;
+			isPaused = false;
 		}
 
 		Phase phase;
@@ -41,6 +42,8 @@ class World {
 		vector<Wolf> & getWolves() { return wolves; }
 		Red getRed() { return red; }
 		House getHouse() {return house; }
+
+		bool isPaused;
 
 	private:
 		void processRedEvent();

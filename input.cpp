@@ -4,7 +4,6 @@
 #include "display.h"
 #include "world.h"
 
-extern bool is_paused;
 extern World world;
 
 namespace input {
@@ -66,10 +65,9 @@ namespace input {
 
 	void keyboard (unsigned char key, int x, int y) {
 		switch(key) {
-			case 'p': is_paused = !is_paused;
-				break;
 			case 'q':
 				exit(0);
+			case 'p': 
 			default:
 				world.handleKeyboard(key, x, y);
 		}

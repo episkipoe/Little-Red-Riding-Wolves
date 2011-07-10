@@ -27,8 +27,10 @@ namespace {
 }
 
 void World::processOneEvent() {
-	processWolfEvent();
-	processRedEvent();
+	if(!isPaused){
+		processWolfEvent();
+		processRedEvent();
+	}
 }
 
 void World::processRedEvent() { 
@@ -106,6 +108,7 @@ void World::switchPhase(Phase new_phase) {
 	} else if(new_phase == PLAYER_RED) {
 		red.resetLocation();
 		wolves = saved_wolves;
+		isPaused = true;
 	} else if (new_phase == GAME_OVER) {
 		red.stop();
 		wolves = saved_wolves;
@@ -132,6 +135,8 @@ void World::display() {
 	if(phase==GAME_OVER) {
 		drawText(-50, 0, game_over_message, Font());
 	}
+	if(isPaused)
+		drawText(-50, -50, "Paused", Font());
 }
 
 void World::playerWins() {
@@ -193,6 +198,9 @@ void World::handleKeyboard(unsigned char key, int x, int y) {
 			break;
 		case 'r':
 			reset();
+			break;
+		case 'p':
+			isPaused = !isPaused;
 			break;
 	}
 }
