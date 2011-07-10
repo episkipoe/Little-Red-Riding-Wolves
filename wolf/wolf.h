@@ -36,14 +36,18 @@ class Wolf : public Drawable {
 			moveVector.normalize();
 		}
 
+		void setOnObstacle(bool on) { onObstacle = on; }
+
 		void update(float frameTime) {
 			lastLoc = location;
-			location = location + moveVector * speed * frameTime;
+			float movementSpeed = (onObstacle ? speed * 0.6 : speed) ; 
+			location = location + moveVector * movementSpeed * frameTime;
 		}
 
 protected:
 	Point moveVector;
 	float speed;
+	bool onObstacle;
 };
 
 #endif

@@ -52,40 +52,48 @@ void World::processRedEvent() {
 }
 
 void World::processWolfEvent() { 
-    if(phase == PLACE_WOLF) return;
+	if(phase == PLACE_WOLF) return;
 
-    for(size_t i=0; i<wolves.size(); i++) {
-        /*for(size_t j=0; j<obstacles.size(); j++)
-            if(wolves[i].touches(obstacles[j]))
-                wolves[i].moveBack();
-	*/
+	bool onObstacle = false;
+	for(size_t i=0; i<wolves.size(); i++) {
 
-	if(wolves[i].touches(&red)) {
-		if(phase == AI_RED) {
-			switchPhase(PLAYER_RED);
-		} else if(phase == PLAYER_RED) {
-			red.eat();
-			playerLoses("You have been eaten.");
+		for(size_t j=0; j<obstacles.size(); j++) {
+			if(wolves[i].touches(obstacles[j])) {
+				onObstacle=true;
+				break;
+			}
 		}
-	}
+		wolves[i].setOnObstacle(onObstacle);
+				
 
-        wolves[i].chase(red.getLocation(),wolves);
-        wolves[i].update(.01);
-    }
+		if(wolves[i].touches(&red)) {
+			if(phase == AI_RED) {
+				switchPhase(PLAYER_RED);
+			} else if(phase == PLAYER_RED) {
+				red.eat();
+				playerLoses("You have been eaten.");
+			}
+		}
+
+		wolves[i].chase(red.getLocation(),wolves);
+		wolves[i].update(.01);
+	}
 }
 
 void World::switchPhase(Phase new_phase) {
-    //playerLoses("Robot red has reached the house");
-    phase = new_phase;
-    if(new_phase == PLACE_WOLF) {
-        glClearColor(0.0f,0.0f,0.0f,1.0f); 
-    } else if(new_phase == AI_RED) {
-        glClearColor(0.3f,1.0f,0.3f,1.0f); 
-        saved_wolves = wolves;
-    } else if(new_phase == PLAYER_RED) {
-        red.resetLocation();
-        wolves = saved_wolves;
-    }
+	//playerLoses("Robot red has reached the house");
+	phase = new_phase;
+	if(new_phase == PLACE_WOLF) {
+		glClearColor(0.0f,0.0f,0.0f,1.0f); 
+	} else if(new_phase == AI_RED) {
+		glClearColor(0.3f,1.0f,0.3f,1.0f); 
+		saved_wolves = wolves;
+	} else if(new_phase == PLAYER_RED) {
+		red.resetLocation();
+		wolves = saved_wolves;
+	} else if (new_phase == GAME_OVER) {
+		red.stop();
+	}
 }
 
 void World::display() {
