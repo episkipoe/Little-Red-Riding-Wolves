@@ -2,6 +2,8 @@
 #include <GL/glut.h>
 #include <tree/tree.h>
 #include <vector>
+#include <algorithm>
+#include <tree/bush.h>
 #include "world.h"
 
 extern Point look;
@@ -162,6 +164,12 @@ void World::handleKeyboard(unsigned char key, int x, int y) {
     }
 }
 
+bool World::overlaps(Point &pos) {
+	if (pos.distance(red.getLocation())<15) return true;
+	if (pos.distance(house.getLocation())<30) return true;
+	return false;
+}
+
 void World::genWorld() {
 	srand(1434);
 	vector<Drawable> placedObjects();
@@ -174,9 +182,9 @@ void World::genWorld() {
 	float currentX=80;
 	float currentY=-60;
 
-	vector<int> yPositions();
+	vector<int> yPositions;
 	for (int i=0; i<numTurns; i++) {
-		yPositions.push_back((rand%11-6)*10);
+		yPositions.push_back((rand()%11-6)*10);
 	}
 	yPositions.push_back(50);
 	sort(yPositions.begin(),yPositions.end());
@@ -184,24 +192,30 @@ void World::genWorld() {
 	for (size_t i=0; i<yPositions.size(); i++) {
 		while (currentY>yPositions[i]) {
 			currentY-=10;
-			paths.push_back(new Path(new Point(currentX, currentY)));
+			paths.push_back(new Path(Point(currentX, currentY)));
 		}
-		red.addPathNode(new Point(currentX,currentY));
+		red.addPathNode(Point(currentX,currentY));
 		if (i!=yPositions.size()-1) {
-			while (currentX > -60 + (110/yPositions.size())*(yPosition.size()-i-1)) {
+			while (currentX > -60 + (110/yPositions.size())*(yPositions.size()-i-1)) {
 				currentX-=10;
-				paths.push_back(new Point(currentX, currentY));
+				paths.push_back(new Path(Point(currentX, currentY)));
 			}
-			red.addPathNode(new Point(currentX,currentY));
+			red.addPathNode(Point(currentX,currentY));
 		}
 	}
 
-	//add some random trees. Keep them off the path
-	for (int i=0; i<60; i++) {
-		Point pos(rand()%201-200,rand()%201-200);
+	for (int i=0; i<40; i++) {
+		Point pos(rand()%301-150,rand()%301-150);
+		if(overlaps(pos)) continue;
 		obstacles.push_back(new Tree(pos));
 	}
-	for (int i=-10; i<=10; i++){
+	for (int i=0; i<80; i++) {
+		Point pos(rand()%301-150,rand()%301-150);
+		if(overlaps(pos)) continue;
+		obstacles.push_back(new Bush(pos));
+	}
+
+	for (int i=-10; i<10; i++){
 		Point pos(i*10,-100);
 		obstacles.push_back(new Fence(pos, HORIZONTAL));
 		pos.y=100;

@@ -13,13 +13,10 @@ class Wolf : public Drawable {
 		}
 
 		void draw() {
-#ifdef DEBUG
-			printf("drawing at %g, %g\n", location.x, location.y);
-#endif
-			draw_texture("wolf", location, 10, 10);
+			draw_texture("wolf", location, 6, 6);
 		}		
 
-		float getRadius() { return 4; }
+		float getRadius() { return 3; }
 
 		void chase(Point red, vector<Wolf>& wolvesVector) {
 			moveVector.x = 0;	
@@ -29,7 +26,7 @@ class Wolf : public Drawable {
 				if (&wolvesVector[i] != this) {
 					Point wolfPos = wolvesVector[i].getLocation();
 					if(location.distance(wolfPos) > 40) continue;
-					moveVector.addVector(location.angle(wolfPos),pow(-20.0/location.distance(wolfPos),3));
+					moveVector.addVector(location.angle(wolfPos),pow(-15.0/location.distance(wolfPos),3));
 				}
 			}
 			moveVector.normalize();

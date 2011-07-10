@@ -28,6 +28,7 @@ class World {
 		void playerWins();
 		void playerLoses(const string & reason);
 
+		bool overlaps(Point &pos) ;
 		void genWorld();
 
 		void handleMouse(int button, int state, int x, int y);

@@ -1,7 +1,7 @@
 #include <common/point.h>
 class Path: public Drawable {
 	public:
-		Path(Point loc) {
+		Path(const Point & loc) {
 			location = loc;
 		}
 

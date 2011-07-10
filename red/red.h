@@ -15,7 +15,7 @@ class Red : public Drawable {
 		}
 
 		void draw() {
-			draw_texture("red", location, 5, 10);
+			draw_texture("red", location, 4, 8);
 		}
 
 		float getRadius() { return 4; }
@@ -90,7 +90,7 @@ class Red : public Drawable {
 
 		void clearPath() { pathPoints.clear(); }
 
-		void addPathNode(Point node) { pathPoints.push_back(node); }
+		void addPathNode(const Point & node) { pathPoints.push_back(node); }
 
 private:
 	Point moveVector;
