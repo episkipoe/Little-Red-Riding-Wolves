@@ -88,6 +88,10 @@ class Red : public Drawable {
 			location = location + moveVector * speed * frameTime;
 		}
 
+		void clearPath() { pathPoints.clear(); }
+
+		void addPathNode(Point node) { pathPoints.push_back(node); }
+
 private:
 	Point moveVector;
 	float speed;

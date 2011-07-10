@@ -1,6 +1,7 @@
 #include <graphics/text.h>
 #include <GL/glut.h>
 #include <tree/tree.h>
+#include <vector>
 #include "world.h"
 
 extern Point look;
@@ -162,9 +163,42 @@ void World::handleKeyboard(unsigned char key, int x, int y) {
 }
 
 void World::genWorld() {
-	srand(389209);
+	srand(1434);
+	vector<Drawable> placedObjects();
+	
+	//door y:50 x:-60
+	//red  y:-60 x:80
+
+	//first, create the path
+	int numTurns = rand()%3+1;
+	float currentX=80;
+	float currentY=-60;
+
+	vector<int> yPositions();
+	for (int i=0; i<numTurns; i++) {
+		yPositions.push_back((rand%11-6)*10);
+	}
+	yPositions.push_back(50);
+	sort(yPositions.begin(),yPositions.end());
+
+	for (size_t i=0; i<yPositions.size(); i++) {
+		while (currentY>yPositions[i]) {
+			currentY-=10;
+			paths.push_back(new Path(new Point(currentX, currentY)));
+		}
+		red.addPathNode(new Point(currentX,currentY));
+		if (i!=yPositions.size()-1) {
+			while (currentX > -60 + (110/yPositions.size())*(yPosition.size()-i-1)) {
+				currentX-=10;
+				paths.push_back(new Point(currentX, currentY));
+			}
+			red.addPathNode(new Point(currentX,currentY));
+		}
+	}
+
+	//add some random trees. Keep them off the path
 	for (int i=0; i<60; i++) {
-		Point pos(rand()%401-200,rand()%401-200);
+		Point pos(rand()%201-200,rand()%201-200);
 		obstacles.push_back(new Tree(pos));
 	}
 	for (int i=-10; i<=10; i++){
