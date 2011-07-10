@@ -3,7 +3,7 @@
 
 #include <graphics/graphics.h>
 #include <common/point.h>
-#include <images/textures.h>
+#include <textures.h>
 
 class Drawable {
 	public:

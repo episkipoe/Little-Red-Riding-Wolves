@@ -181,7 +181,8 @@ void loadImages() {
 	name_to_texture["wolf_down"] = loadTexture("images/WolfDown.png");
 	name_to_texture["house"] = loadTexture("images/GMHouse.png");
 	name_to_texture["red"] = loadTexture("images/RRH.png");
-	name_to_texture["path"] = loadTexture("images/path.png");
+	name_to_texture["path"] = loadTexture("images/path2.png");
+	name_to_texture["bg"] = loadTexture("images/grassBackground.png");
 	name_to_texture["fence_HORIZONTAL"] = loadTexture("images/FenceHorz.png");
 	name_to_texture["fence_VERTICAL"] = loadTexture("images/FenceLeftVert.png");
 	name_to_texture["fence_VERTICAL_B"] = loadTexture("images/FenceRightVert.png");

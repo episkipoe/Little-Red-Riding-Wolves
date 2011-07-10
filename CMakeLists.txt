@@ -17,7 +17,7 @@ add_library (main
 	display.cpp display.h
 	input.cpp input.h
 	world.cpp world.h
-	images/load_png.cpp
+	load_png.cpp
 )
 
 add_library (agents

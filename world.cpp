@@ -7,6 +7,7 @@
 #include <tree/grass.h>
 #include <time.h>
 #include "world.h"
+#include "textures.h"
 
 extern Point look;
 
@@ -109,6 +110,7 @@ void World::switchPhase(Phase new_phase) {
 
 void World::display() {
 	if(phase!=PLACE_WOLF) {	
+		draw_texture("bg", Point(0,0,0) , 200, 200);
 		for(size_t i=0; i<decorations.size(); i++) {
 			decorations[i]->draw();
 		}

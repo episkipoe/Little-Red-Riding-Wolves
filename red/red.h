@@ -2,7 +2,6 @@
 #define RED_H
 
 #include <drawable.h>
-#include <images/textures.h>
 #include <wolf/wolf.h>
 #include <vector>
 #include <map>
