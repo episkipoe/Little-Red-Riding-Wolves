@@ -47,6 +47,7 @@ int main(int argc, char** argv) //finaly the main function
 	glutTimerFunc(200, timer, MSG_TIMER);  
 	glutTimerFunc(100, timer, DISPLAY_TIMER);  
 	glutTimerFunc(100, timer, GAME_TIMER);  
+	glutFullScreen();
 	glutMainLoop() ;
 
 	return 0;
