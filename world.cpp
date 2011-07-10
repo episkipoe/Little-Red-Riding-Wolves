@@ -182,28 +182,28 @@ void World::genWorld() {
 
 	//first, create the path
 	int numTurns = rand()%3+1;
-	float currentX=80;
-	float currentY=-60;
+	Point currentPos(80,-60);
 
-	vector<int> yPositions;
+
+	vector<float> yPositions;
 	for (int i=0; i<numTurns; i++) {
-		yPositions.push_back((rand()%11-6)*10);
+		yPositions.push_back((float) (rand()%11-6)*10);
 	}
 	yPositions.push_back(50);
 	sort(yPositions.begin(),yPositions.end());
 
 	for (size_t i=0; i<yPositions.size(); i++) {
-		while (currentY>yPositions[i]) {
-			currentY-=10;
-			paths.push_back(new Path(Point(currentX, currentY)));
+		while (currentPos.y>yPositions[i]) {
+			currentPos.y-=10;
+			paths.push_back(new Path(currentPos));
 		}
-		red.addPathNode(Point(currentX,currentY));
+		red.addPathNode(currentPos);
 		if (i!=yPositions.size()-1) {
-			while (currentX > -60 + (110/yPositions.size())*(yPositions.size()-i-1)) {
-				currentX-=10;
-				paths.push_back(new Path(Point(currentX, currentY)));
+			while (currentPos.x > -60 + (110/yPositions.size())*(yPositions.size()-i-1)) {
+				currentPos.x-=10;
+				paths.push_back(new Path(currentPos));
 			}
-			red.addPathNode(Point(currentX,currentY));
+			red.addPathNode(currentPos);
 		}
 	}
 
