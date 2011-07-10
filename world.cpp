@@ -37,7 +37,6 @@ void World::processRedEvent() {
 		if(phase == AI_RED) playerLoses("Robot red has reached the house");
 	}
 
-<<<<<<< HEAD
 	bool onPath = false;
 	for(size_t j=0; j<paths.size(); j++) {
 		if(red.touches(paths[j])) {
@@ -47,19 +46,14 @@ void World::processRedEvent() {
 	}
 	red.setOnPath(onPath);
 
-	for(size_t i=0; i<obstacles.size(); i++)
-		if(red.sees(obstacles[i]))
+	for(size_t i=0; i<obstacles.size(); i++) {
+		if(red.sees(obstacles[i])) {
 			red.avoid(obstacles[i]);
-
-=======
-    for(size_t i=0; i<obstacles.size(); i++)
-        if(red.sees(obstacles[i]))
-			red.avoid(obstacles[i]);
-
-	for(size_t i=0; i<obstacles.size(); i++)
-		if(red.touches(obstacles[i]))
+		}
+		if(red.touches(obstacles[i])) {
 			red.moveBack();
->>>>>>> Fix fence collision
+		}
+	}
 
 	if(phase == AI_RED)
 		red.chase(wolves,house.getLocation());
@@ -137,17 +131,6 @@ void World::display() {
 }
 
 void World::playerWins() {
-<<<<<<< HEAD
-    game_over_message = "A winnar is you!";
-    victory=true;
-    switchPhase(GAME_OVER);
-}
-
-void World::playerLoses(const string & reason) {
-    game_over_message = reason;
-    victory=false;
-    switchPhase(GAME_OVER);
-=======
 	game_over_message = "A winnar is you!";
 	victory=true;
 	switchPhase(GAME_OVER);
@@ -157,7 +140,6 @@ void World::playerLoses(const string & reason) {
 	game_over_message = reason;
 	victory=false;
 	switchPhase(GAME_OVER);
->>>>>>> Fix fence collision
 }
 
 void World::placeObject(int button, int x, int y) {
