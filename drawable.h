@@ -17,6 +17,7 @@ class Drawable {
 		}
 
 		virtual void update(float) {};
+		virtual float getFearValue() { return 8; }
         
 		bool touches(Drawable *target) {
 			if(location.distance(target->location) < (target->getRadius() + getRadius())) {

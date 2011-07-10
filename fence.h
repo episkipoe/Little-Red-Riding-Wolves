@@ -35,6 +35,7 @@ class Fence: public Drawable {
 		}
 
 		float getRadius() { return 5; }
+		float getFearValue() { return 20; }
 
 	private:
 		Orient orient;

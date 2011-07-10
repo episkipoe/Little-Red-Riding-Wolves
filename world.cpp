@@ -5,12 +5,12 @@
 #include <algorithm>
 #include <tree/bush.h>
 #include <tree/grass.h>
+#include <time.h>
 #include "world.h"
 
 extern Point look;
 
 namespace {
-    //TODO:  boundaries on the world
     Point screenToWorld(int x, int y) {
         int viewport[4];
         double projection[16];
@@ -36,9 +36,19 @@ void World::processRedEvent() {
 		else if(phase == AI_RED) playerLoses("Robot red has reached the house");
 	}
 
-    for(size_t i=0; i<obstacles.size(); i++)
-        if(red.sees(obstacles[i]))
-            red.avoid(obstacles[i]);
+	bool onPath = false;
+	for(size_t j=0; j<paths.size(); j++) {
+		if(red.touches(paths[j])) {
+			onPath=true;
+			break;
+		}
+	}
+	red.setOnPath(onPath);
+
+	for(size_t i=0; i<obstacles.size(); i++)
+		if(red.sees(obstacles[i]))
+			red.avoid(obstacles[i]);
+
 
 	if(phase == PLAYER_RED) {
 		for(size_t i=0; i<obstacles.size(); i++)
@@ -48,6 +58,7 @@ void World::processRedEvent() {
 	}
 	if(phase == AI_RED)
 		red.chase(wolves,house.getLocation());
+
 	red.update(.01);
 }
 
@@ -86,7 +97,7 @@ void World::switchPhase(Phase new_phase) {
 	if(new_phase == PLACE_WOLF) {
 		glClearColor(0.0f,0.0f,0.0f,1.0f); 
 	} else if(new_phase == AI_RED) {
-		glClearColor(0.3f,1.0f,0.3f,1.0f); 
+		glClearColor(0.2f,0.8f,0.2f,1.0f); 
 		saved_wolves = wolves;
 	} else if(new_phase == PLAYER_RED) {
 		red.resetLocation();
@@ -121,14 +132,12 @@ void World::display() {
 }
 
 void World::playerWins() {
-    glClearColor(1,1,1,1);
     game_over_message = "A winnar is you!";
     victory=true;
     switchPhase(GAME_OVER);
 }
 
 void World::playerLoses(const string & reason) {
-    glClearColor(0,0,0,1);
     game_over_message = reason;
     victory=false;
     switchPhase(GAME_OVER);
@@ -190,6 +199,10 @@ void World::reset(){
 	saved_wolves.clear();
 	switchPhase(PLACE_WOLF);
 	red.resetLocation();
+	decorations.clear();
+	paths.clear();
+	obstacles.clear();
+	genWorld();
 }
 
 bool World::overlaps(Point &pos) {
@@ -199,7 +212,8 @@ bool World::overlaps(Point &pos) {
 }
 
 void World::genWorld() {
-	srand(6364);
+        srand(time(NULL));
+
 	vector<Drawable> placedObjects();
 	
 	//door y:50 x:-60

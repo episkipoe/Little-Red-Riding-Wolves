@@ -8,7 +8,7 @@ class Wolf : public Drawable {
 	public:
 		Wolf (Point loc)  { 
 			location = loc;
-			speed=30;
+			speed=40;
 			viewDistance = 3;//Wolves can see 3 times their raidus away from themselves
 		}
 

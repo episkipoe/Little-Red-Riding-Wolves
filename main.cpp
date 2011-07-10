@@ -1,6 +1,5 @@
 #include <GL/glut.h>
 #include <vector>
-#include <time.h>
 #include "display.h"
 #include "input.h"
 #include "world.h"
@@ -35,12 +34,6 @@ int main(int argc, char** argv) //finaly the main function
 {
 	//initialise glut
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH) ;
-
-    #if defined(_WIN32)
-        srand(time(NULL));
-    #else
-     	srandom(time(NULL));
-    #endif
 
 	glutInit(&argc,argv);
 	initialize_display();

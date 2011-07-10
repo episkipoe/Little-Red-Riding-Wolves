@@ -11,7 +11,7 @@ class Red : public Drawable {
 		Red () {
 			resetLocation();
 			speed=40;
-			viewDistance=5;//Red can see 5 times her radius
+			viewDistance=8;//Red can see x * radius 
 		}
 
 		void draw() {
@@ -32,6 +32,7 @@ class Red : public Drawable {
 			lastLoc = location;
 			onPath=false;
 			beingChased=false;
+			pathPoints.clear();
 			avoidanceList.clear();
 			pathPosition=0;
 			alive=true;
@@ -66,7 +67,7 @@ class Red : public Drawable {
 					Point wolfPos = nearest_wolves[i].getLocation();
 					float dx = location.distance(wolfPos);
 					if(dx > 60) continue;
-					moveVector.addVector(location.angle(wolfPos),-5.0/dx);
+					moveVector.addVector(location.angle(wolfPos),-14.0/dx);
 					//printf("angle: %g\n", location.angle(wolfPos));
 				}
 				//next, factor in all the avoidance points
@@ -100,20 +101,19 @@ class Red : public Drawable {
 		}
 
 		void avoidObstacles(){
-			for (size_t i=0; i<avoidanceList.size(); i++) {
-				if(!sees(avoidanceList[i])) { continue; }
-				Point avoidPoint = avoidanceList[i]->getLocation();
+			map<Drawable *, float>::iterator it;
+			for(it = avoidanceList.begin() ; it != avoidanceList.end() ; it++) {
+				Drawable * avoid = it->first;
+				if(!sees(avoid)) { continue; }
+				Point avoidPoint = avoid->getLocation();
 				float dx = location.distance(avoidPoint);
-				moveVector.addVector(location.angle(avoidPoint),pow(-10.0/dx,3));
+				moveVector.addVector(location.angle(avoidPoint),pow(-it->second/dx,3));
 			}
 		}
 
 		void avoid(Drawable *d) {
-			if(isAvoiding.find(d) == isAvoiding.end())
-				avoidanceList.push_back(d);
-			isAvoiding[d] = true;
+			avoidanceList[d] = d->getFearValue();
 		}
-
 
 		void follow(Point followPoint) {
 			moveVector = followPoint + (location * -1);
@@ -143,10 +143,9 @@ private:
 	bool onPath;
 	bool beingChased;
 	bool alive;
-	vector<Drawable *> avoidanceList;
 	vector<Point> pathPoints;
 	size_t pathPosition;
-	map<Drawable*, bool> isAvoiding;
+	map<Drawable*, float> avoidanceList;
 };
 
 #endif
