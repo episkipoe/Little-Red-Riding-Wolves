@@ -155,7 +155,8 @@ void World::placeObject(int button, int x, int y) {
 	Point clicked = screenToWorld(x,y);
 	if (button == GLUT_LEFT_BUTTON) {
 		Wolf wolf(clicked);
-		addWolf(wolf);
+		if(!red.sees(&wolf))
+			addWolf(wolf);
 	} else {
 		obstacles.push_back(new Tree(clicked));
 	}
