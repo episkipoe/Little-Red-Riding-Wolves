@@ -174,7 +174,10 @@ GLuint loadTexture(const string & file_name) {
 void loadImages() {
 	name_to_texture["tree"] = loadTexture("images/Tree.png");
 	name_to_texture["bush"] = loadTexture("images/BushGreen.png");
-	name_to_texture["wolf"] = loadTexture("images/wolf.png");
+	name_to_texture["wolf_left"] = loadTexture("images/WolfLeft.png");
+	name_to_texture["wolf_right"] = loadTexture("images/WolfRight.png");
+	name_to_texture["wolf_up"] = loadTexture("images/WolfUp.png");
+	name_to_texture["wolf_down"] = loadTexture("images/WolfDown.png");
 	name_to_texture["house"] = loadTexture("images/GMHouse.png");
 	name_to_texture["red"] = loadTexture("images/RRH.png");
 	name_to_texture["path"] = loadTexture("images/path.png");

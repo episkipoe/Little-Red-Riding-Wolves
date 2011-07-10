@@ -13,7 +13,11 @@ class Wolf : public Drawable {
 		}
 
 		void draw() {
-			draw_texture("wolf", location, 6, 6);
+			if(moveVector.x>=0) {
+				draw_texture("wolf_right", location, 6, 6);
+			} else {
+				draw_texture("wolf_left", location, 6, 6);
+			}
 		}		
 
 		float getRadius() { return 3; }
