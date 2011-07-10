@@ -13,7 +13,7 @@ class Wolf : public Drawable {
 		}
 
 		void draw() {
-			if(moveVector.x>=0) {
+			if(moveVector.x>=0.1) {
 				draw_texture("wolf_right", location, 6, 6);
 			} else {
 				draw_texture("wolf_left", location, 6, 6);

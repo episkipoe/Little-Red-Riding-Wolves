@@ -4,6 +4,7 @@
 #include <vector>
 #include <algorithm>
 #include <tree/bush.h>
+#include <tree/grass.h>
 #include "world.h"
 
 extern Point look;
@@ -60,8 +61,12 @@ void World::processWolfEvent() {
 	*/
 
 	if(wolves[i].touches(&red)) {
-		if(phase == AI_RED)          switchPhase(PLAYER_RED);
-		else if(phase == PLAYER_RED) playerLoses("You have been eaten.");
+		if(phase == AI_RED) {
+			switchPhase(PLAYER_RED);
+		} else if(phase == PLAYER_RED) {
+			red.eat();
+			playerLoses("You have been eaten.");
+		}
 	}
 
         wolves[i].chase(red.getLocation(),wolves);
@@ -84,25 +89,27 @@ void World::switchPhase(Phase new_phase) {
 }
 
 void World::display() {
-    for(size_t i=0; i<paths.size(); i++) {
-        paths[i]->draw();
-    }
-    for(size_t i=0; i<obstacles.size(); i++) {
-        obstacles[i]->draw();
-    }
-    for(size_t i=0; i<wolves.size(); i++) {
-        wolves[i].draw();
-    }
-    house.draw();
-    red.draw();
+	if(phase!=PLACE_WOLF) {	
+		for(size_t i=0; i<decorations.size(); i++) {
+			decorations[i]->draw();
+		}
+	}	
 	for(size_t i=0; i<paths.size(); i++) {
-        paths[i]->draw();
-    }
+		paths[i]->draw();
+	}
+	for(size_t i=0; i<obstacles.size(); i++) {
+		obstacles[i]->draw();
+	}
+	for(size_t i=0; i<wolves.size(); i++) {
+		wolves[i].draw();
+	}
+	house.draw();
+	red.draw();
 
-    if(phase==GAME_OVER) {
-        (victory ? glColor3f(0,0,0) : glColor3f(1,0,0));
-        drawText(0, 0, game_over_message, Font());
-    }
+	if(phase==GAME_OVER) {
+		(victory ? glColor3f(0,0,0) : glColor3f(1,0,0));
+		drawText(-50, 0, game_over_message, Font());
+	}
 }
 
 void World::playerWins() {
@@ -151,6 +158,11 @@ void World::moveMouse(int x, int y) {
 void World::handleKeyboard(unsigned char key, int x, int y) {
     switch(key) {
         case ' ':
+            if(phase==PLACE_WOLF) {
+                switchPhase(AI_RED);
+                return;
+            }
+	case 's':
             if(phase==PLACE_WOLF) {
                 switchPhase(AI_RED);
                 return;
@@ -214,6 +226,11 @@ void World::genWorld() {
 	}
 	red.addPathNode(currentPos);
 
+	for (int i=0; i<80; i++) {
+		Point pos(rand()%301-150,rand()%301-150);
+		if(overlaps(pos)) continue;
+		decorations.push_back(new Grass(pos));
+	}
 	for (int i=0; i<40; i++) {
 		Point pos(rand()%301-150,rand()%301-150);
 		if(overlaps(pos)) continue;

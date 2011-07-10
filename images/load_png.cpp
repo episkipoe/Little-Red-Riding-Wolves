@@ -174,6 +174,7 @@ GLuint loadTexture(const string & file_name) {
 void loadImages() {
 	name_to_texture["tree"] = loadTexture("images/Tree.png");
 	name_to_texture["bush"] = loadTexture("images/BushGreen.png");
+	name_to_texture["grass"] = loadTexture("images/GrassTile.png");
 	name_to_texture["wolf_left"] = loadTexture("images/WolfLeft.png");
 	name_to_texture["wolf_right"] = loadTexture("images/WolfRight.png");
 	name_to_texture["wolf_up"] = loadTexture("images/WolfUp.png");
@@ -207,4 +208,23 @@ void draw_texture(std::string name, Point location, float width, float height) {
 	glPopMatrix();
 	glDisable( GL_TEXTURE_2D );
 }
+
+void draw_texture(std::string name, Point location, float width, float height, float rotation) {
+	glColor4f(1,1,1,1);
+	glEnable( GL_TEXTURE_2D );
+	glBindTexture( GL_TEXTURE_2D, get_texture(name) );
+	glPushMatrix();
+		glTranslatef(location.x, location.y, 0);
+		glScalef(width, height, 1);
+		glRotatef(rotation, 0, 0, 1);
+		glBegin( GL_QUADS );
+			glTexCoord2d(0.0,0.0); glVertex2d(-0.5,-0.5);
+			glTexCoord2d(1.0,0.0); glVertex2d(.5,-0.5);
+			glTexCoord2d(1.0,1.0); glVertex2d(.5,.5);
+			glTexCoord2d(0.0,1.0); glVertex2d(-0.5,.5);
+		glEnd();
+	glPopMatrix();
+	glDisable( GL_TEXTURE_2D );
+}
+
 

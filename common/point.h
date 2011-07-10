@@ -14,10 +14,13 @@ struct Point  //stores a location
 	float z;
 
 	Point() {
-		x = 0; y = 0; z = 0;
+		clear();
 	}
 	Point(float theX, float theY, float theZ = 0.0) {
 		x = theX; y = theY; z = theZ;
+	}
+	void clear() { 
+		x = 0; y = 0; z = 0;
 	}
 	void show(void) {
 		printf("%g, %g, %g\n", x, y, z);

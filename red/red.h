@@ -15,7 +15,11 @@ class Red : public Drawable {
 		}
 
 		void draw() {
-			draw_texture("red", location, 4, 8);
+			if(alive) {
+				draw_texture("red", location, 4, 8);
+			} else {
+				draw_texture("red", location, 4, 8, 90);
+			}
 		}
 
 		float getRadius() { return 4; }
@@ -24,11 +28,13 @@ class Red : public Drawable {
 			location.x = 80;
 			location.y = -60;
 			location.z = 0;
+			moveVector.clear();
 			lastLoc = location;
 			onPath=false;
 			beingChased=false;
 			avoidanceList.clear();
 			pathPosition=0;
+			alive=true;
 		}
 
 		void chase(vector<Wolf>& wolvesVector, Point housePos) {
@@ -84,10 +90,12 @@ class Red : public Drawable {
 		}
 
 		void beginChase() { beingChased=true; }
+		void eat() { alive = false; }
 
 		void setOnPath(bool isOnPath) { onPath = isOnPath; }
 
 		void update(float frameTime) {
+			if(!alive) return;
 			lastLoc = location;
 			location = location + moveVector * speed * (onPath ? 1 : 1.5) * frameTime;
 		}
@@ -101,6 +109,7 @@ private:
 	float speed;
 	bool onPath;
 	bool beingChased;
+	bool alive;
 	vector<Drawable *> avoidanceList;
 	vector<Point> pathPoints;
 	size_t pathPosition;

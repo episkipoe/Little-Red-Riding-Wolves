@@ -52,6 +52,7 @@ class World {
 		std::vector<Wolf> wolves;
 		std::vector<Wolf> saved_wolves;
 		std::vector<Drawable *> obstacles;
+		std::vector<Drawable *> decorations;
 		std::vector<Path *> paths;
 		Red red;	
 		House house;
