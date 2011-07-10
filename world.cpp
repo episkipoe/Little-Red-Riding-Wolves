@@ -32,9 +32,9 @@ void World::processRedEvent() {
 		else if(phase == AI_RED) playerLoses("Robot red has reached the house");
 	}
 
-	for(size_t i=0; i<obstacles.size(); i++)
-		if(red.sees(obstacles[i]))
-			red.addAvoidancePoint(obstacles[i]->getLocation());
+    for(size_t i=0; i<obstacles.size(); i++)
+        if(red.sees(obstacles[i]))
+            red.avoid(obstacles[i]);
 
 	if(phase == PLAYER_RED) {
 		red.update(.01);

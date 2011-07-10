@@ -5,6 +5,7 @@
 #include <images/textures.h>
 #include <wolf/wolf.h>
 #include <vector>
+#include <map>
 class Red : public Drawable {
 	public:
 		Red () {
@@ -63,8 +64,10 @@ class Red : public Drawable {
 
 		}
 
-		void addAvoidancePoint(Point p) {
-			avoidanceList.push_back(p);
+		void avoid(Drawable *d) {
+            if(isAvoiding.find(d) == isAvoiding.end())
+			    avoidanceList.push_back(d->getLocation());
+            isAvoiding[d] = true;
 		}
 
 
@@ -90,6 +93,7 @@ private:
 	vector<Point> avoidanceList;
 	vector<Point> pathPoints;
 	size_t pathPosition;
+    map<Drawable*, bool> isAvoiding;
 };
 
 #endif
