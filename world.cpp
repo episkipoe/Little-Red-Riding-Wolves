@@ -206,6 +206,9 @@ void World::reset(){
 bool World::overlaps(Point &pos) {
 	if (pos.distance(red.getLocation())<15) return true;
 	if (pos.distance(house.getLocation())<30) return true;
+	for (size_t j=0; j<paths.size(); j++) {
+		if (pos.distance(paths[j]->getLocation())<8) return true;
+	}
 	return false;
 }
 
