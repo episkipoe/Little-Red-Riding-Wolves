@@ -51,6 +51,7 @@ void World::processRedEvent() {
 			red.avoid(obstacles[i]);
 		}
 		if(red.touches(obstacles[i])) {
+			red.beginChase();
 			red.moveBack();
 		}
 	}
@@ -107,12 +108,10 @@ void World::switchPhase(Phase new_phase) {
 }
 
 void World::display() {
-	if(phase!=PLACE_WOLF) {	
-		draw_texture("bg", Point(0,0,0) , 200, 200);
-		for(size_t i=0; i<decorations.size(); i++) {
-			decorations[i]->draw();
-		}
-	}	
+	draw_texture("bg", Point(0,0,0) , 200, 200);
+	for(size_t i=0; i<decorations.size(); i++) {
+		decorations[i]->draw();
+	}
 	for(size_t i=0; i<paths.size(); i++) {
 		paths[i]->draw();
 	}
