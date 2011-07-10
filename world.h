@@ -45,6 +45,7 @@ class World {
 	private:
 		void processRedEvent();
 		void processWolfEvent();
+		void reset();
 
 		std::string game_over_message;
 

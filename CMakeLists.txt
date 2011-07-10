@@ -21,7 +21,7 @@ add_library (main
 )
 
 add_library (agents
-	red/red.cpp red/red.h
+	red/red.h
 	wolf/wolf.cpp wolf/wolf.h
 )
 

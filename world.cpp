@@ -164,30 +164,32 @@ void World::moveMouse(int x, int y) {
 }
 
 void World::handleKeyboard(unsigned char key, int x, int y) {
-    switch(key) {
-        case ' ':
-            if(phase==PLACE_WOLF) {
-                switchPhase(AI_RED);
-                return;
-            }
-	case 's':
-            if(phase==PLACE_WOLF) {
-                switchPhase(AI_RED);
-                return;
-            }
-            if(phase==AI_RED) {
-                switchPhase(PLAYER_RED);
-                return;
-            }
-            if(phase==PLAYER_RED) {
-                switchPhase(GAME_OVER);
-                return;
-            }
-            if(phase==GAME_OVER) {
-                switchPhase(PLACE_WOLF);
-                return;
-            }
-    }
+	switch(key) {
+		case ' ':
+			if(phase==PLACE_WOLF)
+				switchPhase(AI_RED);
+			break;
+		case 's':
+			if(phase==PLACE_WOLF)
+				switchPhase(AI_RED);
+			if(phase==AI_RED)
+				switchPhase(PLAYER_RED);
+			if(phase==PLAYER_RED)
+				switchPhase(GAME_OVER);
+			if(phase==GAME_OVER)
+				switchPhase(PLACE_WOLF);
+			break;
+		case 'r':
+			reset();
+			break;
+	}
+}
+
+void World::reset(){
+	wolves.clear();
+	saved_wolves.clear();
+	switchPhase(PLACE_WOLF);
+	red.resetLocation();
 }
 
 bool World::overlaps(Point &pos) {
