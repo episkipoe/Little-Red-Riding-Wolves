@@ -37,16 +37,14 @@ void World::processRedEvent() {
             red.avoid(obstacles[i]);
 
 	if(phase == PLAYER_RED) {
-		red.update(.01);
 		for(size_t i=0; i<obstacles.size(); i++)
 			if(red.touches(obstacles[i])) {
 				red.moveBack();
 			}
 	}
-	if(phase == AI_RED) { 
+	if(phase == AI_RED)
 		red.chase(wolves,house.getLocation());
-		red.update(.01);
-	}
+	red.update(.01);
 }
 
 void World::processWolfEvent() { 

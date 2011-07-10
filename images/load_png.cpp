@@ -177,7 +177,14 @@ void loadImages() {
 	name_to_texture["house"] = loadTexture("images/GMHouse.png");
 	name_to_texture["red"] = loadTexture("images/RRH.png");
 	name_to_texture["path"] = loadTexture("images/path.png");
-	name_to_texture["fence"] = loadTexture("images/Fence.png");
+	name_to_texture["fence_HORIZONTAL"] = loadTexture("images/FenceHorz.png");
+	name_to_texture["fence_VERTICAL"] = loadTexture("images/FenceLeftVert.png");
+	name_to_texture["fence_VERTICAL_B"] = loadTexture("images/FenceRightVert.png");
+	name_to_texture["fence_GATE"] = loadTexture("images/FenceCenter.png");
+	name_to_texture["fence_BACKSLASH_A"] = loadTexture("images/FenceRightTop.png");
+	name_to_texture["fence_BACKSLASH_B"] = loadTexture("images/FenceLeftBend.png");
+	name_to_texture["fence_FORWARDSLASH_A"] = loadTexture("images/FenceRightBend.png");
+	name_to_texture["fence_FORWARDSLASH_B"] = loadTexture("images/FenceLeftTop.png");
 }
 
 void draw_texture(std::string name, Point location, float width, float height) {

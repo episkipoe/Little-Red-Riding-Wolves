@@ -76,7 +76,6 @@ class Red : public Drawable {
 
 		void follow(Point followPoint) {
 			moveVector = followPoint + (location * -1);
-            avoidObstacles();
 			moveVector.normalize();
 		}
 
