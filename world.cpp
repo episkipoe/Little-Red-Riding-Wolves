@@ -34,9 +34,10 @@ void World::processOneEvent() {
 void World::processRedEvent() { 
 	if (red.touches(&house)) {
 		if(phase == PLAYER_RED)  playerWins();
-		else if(phase == AI_RED) playerLoses("Robot red has reached the house");
+		if(phase == AI_RED) playerLoses("Robot red has reached the house");
 	}
 
+<<<<<<< HEAD
 	bool onPath = false;
 	for(size_t j=0; j<paths.size(); j++) {
 		if(red.touches(paths[j])) {
@@ -50,13 +51,16 @@ void World::processRedEvent() {
 		if(red.sees(obstacles[i]))
 			red.avoid(obstacles[i]);
 
+=======
+    for(size_t i=0; i<obstacles.size(); i++)
+        if(red.sees(obstacles[i]))
+			red.avoid(obstacles[i]);
 
-	if(phase == PLAYER_RED) {
-		for(size_t i=0; i<obstacles.size(); i++)
-			if(red.touches(obstacles[i])) {
-				red.moveBack();
-			}
-	}
+	for(size_t i=0; i<obstacles.size(); i++)
+		if(red.touches(obstacles[i]))
+			red.moveBack();
+>>>>>>> Fix fence collision
+
 	if(phase == AI_RED)
 		red.chase(wolves,house.getLocation());
 
@@ -76,7 +80,7 @@ void World::processWolfEvent() {
 			}
 		}
 		wolves[i].setOnObstacle(onObstacle);
-				
+
 
 		if(wolves[i].touches(&red)) {
 			if(phase == AI_RED) {
@@ -128,12 +132,12 @@ void World::display() {
 	red.draw();
 
 	if(phase==GAME_OVER) {
-		(victory ? glColor3f(0,0,0) : glColor3f(1,0,0));
 		drawText(-50, 0, game_over_message, Font());
 	}
 }
 
 void World::playerWins() {
+<<<<<<< HEAD
     game_over_message = "A winnar is you!";
     victory=true;
     switchPhase(GAME_OVER);
@@ -143,35 +147,46 @@ void World::playerLoses(const string & reason) {
     game_over_message = reason;
     victory=false;
     switchPhase(GAME_OVER);
+=======
+	game_over_message = "A winnar is you!";
+	victory=true;
+	switchPhase(GAME_OVER);
+}
+
+void World::playerLoses(const string & reason) {
+	game_over_message = reason;
+	victory=false;
+	switchPhase(GAME_OVER);
+>>>>>>> Fix fence collision
 }
 
 void World::placeObject(int button, int x, int y) {
-    Point clicked = screenToWorld(x,y);
-    if (button == GLUT_LEFT_BUTTON) {
-        Wolf wolf(clicked);
-        addWolf(wolf);
-    } else {
-        obstacles.push_back(new Tree(clicked));
-    }
+	Point clicked = screenToWorld(x,y);
+	if (button == GLUT_LEFT_BUTTON) {
+		Wolf wolf(clicked);
+		addWolf(wolf);
+	} else {
+		obstacles.push_back(new Tree(clicked));
+	}
 }
 
 void World::guideRed(int button, int x, int y) {
-    Point clicked = screenToWorld(x,y);
-    if (button == GLUT_LEFT_BUTTON) {
-        red.follow(clicked);
-    } else {
-    }
+	Point clicked = screenToWorld(x,y);
+	if (button == GLUT_LEFT_BUTTON) {
+		red.follow(clicked);
+	} else {
+	}
 }
 
 void World::handleMouse(int button, int state, int x, int y) {
-    if(state==GLUT_DOWN) return;
+	if(state==GLUT_DOWN) return;
 
-    if(phase == PLACE_WOLF) placeObject(button, x, y); 
-    if(phase == PLAYER_RED) guideRed(button, x, y);
+	if(phase == PLACE_WOLF) placeObject(button, x, y); 
+	if(phase == PLAYER_RED) guideRed(button, x, y);
 }
 
 void World::moveMouse(int x, int y) {
-    if(phase == PLAYER_RED) guideRed(GLUT_LEFT_BUTTON, x, y);
+	if(phase == PLAYER_RED) guideRed(GLUT_LEFT_BUTTON, x, y);
 }
 
 void World::handleKeyboard(unsigned char key, int x, int y) {
@@ -217,7 +232,7 @@ void World::genWorld() {
         srand(time(NULL));
 
 	vector<Drawable> placedObjects();
-	
+
 	//door y:50 x:-60
 	//red  y:-60 x:80
 
@@ -303,10 +318,10 @@ Point World::drawPath(Point start, Point end, bool goUp) {
 		}
 	}
 	/*while (start.x>end.x || start.y<end.y) {
-		Point p(start.x,start.y);
-		paths.push_back(new Path(p));
-		start.addVector(angle,10);
-	}*/
+	  Point p(start.x,start.y);
+	  paths.push_back(new Path(p));
+	  start.addVector(angle,10);
+	  }*/
 	return start;
 }
 

@@ -34,8 +34,8 @@ class Fence: public Drawable {
 				draw_texture("fence_FORWARDSLASH_B", location, 4, 10);
 		}
 
-		float getRadius() { return 5; }
 		float getFearValue() { return 20; }
+		float getRadius() { return 1; }
 
 	private:
 		Orient orient;
