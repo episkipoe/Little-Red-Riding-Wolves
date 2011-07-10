@@ -249,13 +249,25 @@ void World::genWorld() {
 		obstacles.push_back(new Bush(pos));
 	}
 
+	obstacles.push_back(new Fence(95, 99, BACKSLASH_A));
+	obstacles.push_back(new Fence(95, -99, FORWARDSLASH_A));
+	obstacles.push_back(new Fence(-95, -99, BACKSLASH_B));
+	obstacles.push_back(new Fence(-95, 99, FORWARDSLASH_B));
 	for (int i=-10; i<10; i++){
-		Point pos(i*10,-100);
-		obstacles.push_back(new Fence(pos, HORIZONTAL));
-		pos.y=100;
-		obstacles.push_back(new Fence(pos, HORIZONTAL));
+		Point pos(i*10-2,-100);
+		if(pos.x > -100){
+			if(rand()%100 > 80)
+				obstacles.push_back(new Fence(pos, GATE));
+			else
+				obstacles.push_back(new Fence(pos, HORIZONTAL));
+			pos.y=100;
+			if(rand()%100 > 80)
+				obstacles.push_back(new Fence(pos, GATE));
+			else
+				obstacles.push_back(new Fence(pos, HORIZONTAL));
+		}
 		pos.x=-97;
-		pos.y=i*10;
+		pos.y=i*10+3;
 		obstacles.push_back(new Fence(pos, VERTICAL));
 		pos.x=97;
 		obstacles.push_back(new Fence(pos, VERTICAL_B));

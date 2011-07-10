@@ -127,7 +127,7 @@ class Red : public Drawable {
 		void setOnPath(bool isOnPath) { onPath = isOnPath; }
 
 		void update(float frameTime) {
-			if(!alive) return;
+			if(!alive) resetLocation();
 			lastLoc = location;
 			float movementSpeed = (onPath ? speed * 1.5 : speed);
 			location = location + moveVector * movementSpeed * frameTime;
