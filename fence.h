@@ -7,7 +7,6 @@ class Fence: public Drawable {
 	public:
 		Fence(Point loc, Orient o) {
 			location = loc;
-			radius = 5;
 			orient = o;
 		}
 
@@ -15,9 +14,9 @@ class Fence: public Drawable {
 			if(orient == HORIZONTAL)
 				draw_texture("fence_HORIZONTAL", location, 10, 10);
 			if(orient == VERTICAL)
-				draw_texture("fence_VERTICAL", location, 10, 10);
+				draw_texture("fence_VERTICAL", location, 4, 10);
 			if(orient == VERTICAL_B)
-				draw_texture("fence_VERTICAL_B", location, 10, 10);
+				draw_texture("fence_VERTICAL_B", location, 4, 10);
 			if(orient == GATE)
 				draw_texture("fence_GATE", location, 10, 10);
 			if(orient == BACKSLASH_A)

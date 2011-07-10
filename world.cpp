@@ -167,16 +167,16 @@ void World::genWorld() {
 		Point pos(rand()%401-200,rand()%401-200);
 		obstacles.push_back(new Tree(pos));
 	}
-	for (int i=-10; i<10; i++){
+	for (int i=-10; i<=10; i++){
 		Point pos(i*10,-100);
-		obstacles.push_back(new Fence(pos));
+		obstacles.push_back(new Fence(pos, HORIZONTAL));
 		pos.y=100;
-		obstacles.push_back(new Fence(pos));
-		pos.x=-100;
+		obstacles.push_back(new Fence(pos, HORIZONTAL));
+		pos.x=-97;
 		pos.y=i*10;
-		obstacles.push_back(new Fence(pos));
-		pos.x=100;
-		obstacles.push_back(new Fence(pos));
+		obstacles.push_back(new Fence(pos, VERTICAL));
+		pos.x=97;
+		obstacles.push_back(new Fence(pos, VERTICAL_B));
 	}
 }
 
