@@ -57,8 +57,8 @@ void initialize_display(void) {
 	input::register_callbacks();
 	/*get ready to draw*/
 	glClearColor(0.0f,0.0f,0.0f,1.0f); 
-	glEnable(GL_DEPTH_TEST);
-  	glDepthFunc(GL_LESS);
+	glDisable(GL_DEPTH_TEST);
+  	//glDepthFunc(GL_LESS);
 	glEnable(GL_BLEND);
 	glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
   	glPointSize(4.0);
