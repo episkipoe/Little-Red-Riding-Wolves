@@ -22,12 +22,14 @@ class Wolf : public Drawable {
 		float getRadius() { return 4; }
 
 		void chase(Point red, vector<Wolf>& wolvesVector) {
-			moveVector.x=(red.x-location.x)*2;
-			moveVector.y=(red.y-location.y)*2;
-			for (int i=0; i<wolvesVector.size(); i++) {
+			moveVector.x = 0;	
+			moveVector.y = 0;
+			moveVector.addVector(location.angle(red), 1.0);
+			for (size_t i=0; i<wolvesVector.size(); i++) {
 				if (&wolvesVector[i] != this) {
 					Point wolfPos = wolvesVector[i].getLocation();
-					moveVector.addVector(location.angle(wolfPos),pow(-4.0/location.distance(wolfPos),3)/wolvesVector.size());
+					if(location.distance(wolfPos) > 40) continue;
+					moveVector.addVector(location.angle(wolfPos),pow(-20.0/location.distance(wolfPos),3));
 				}
 			}
 			moveVector.normalize();
