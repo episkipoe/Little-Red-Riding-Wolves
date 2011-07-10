@@ -95,6 +95,9 @@ void World::display() {
     }
     house.draw();
     red.draw();
+	for(size_t i=0; i<paths.size(); i++) {
+        paths[i]->draw();
+    }
 
     if(phase==GAME_OVER) {
         (victory ? glColor3f(0,0,0) : glColor3f(1,0,0));
@@ -174,14 +177,15 @@ bool World::overlaps(Point &pos) {
 }
 
 void World::genWorld() {
-	srand(1434);
+	srand(92343);
 	vector<Drawable> placedObjects();
 	
 	//door y:50 x:-60
 	//red  y:-60 x:80
 
 	//first, create the path
-	int numTurns = rand()%3+1;
+	//int numTurns = rand()%3+1;
+	int numTurns = 2;
 	Point currentPos(80,-60);
 
 
@@ -189,7 +193,6 @@ void World::genWorld() {
 	for (int i=0; i<numTurns; i++) {
 		yPositions.push_back((float) (rand()%11-6)*10);
 	}
-	yPositions.push_back(50);
 	sort(yPositions.begin(),yPositions.end());
 
 	for (size_t i=0; i<yPositions.size(); i++) {
@@ -198,14 +201,18 @@ void World::genWorld() {
 			paths.push_back(new Path(currentPos));
 		}
 		red.addPathNode(currentPos);
-		if (i!=yPositions.size()-1) {
-			while (currentPos.x > -60 + (110/yPositions.size())*(yPositions.size()-i-1)) {
-				currentPos.x-=10;
-				paths.push_back(new Path(currentPos));
-			}
-			red.addPathNode(currentPos);
+
+		while (currentPos.x > -60 + (110/yPositions.size())*(yPositions.size()-i-1)) {
+			currentPos.x-=10;
+			paths.push_back(new Path(currentPos));
 		}
+		red.addPathNode(currentPos);
 	}
+	while (currentPos.y>-60) {
+		currentPos.y-=10;
+		paths.push_back(new Path(currentPos));
+	}
+	red.addPathNode(currentPos);
 
 	for (int i=0; i<40; i++) {
 		Point pos(rand()%301-150,rand()%301-150);

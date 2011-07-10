@@ -89,7 +89,7 @@ class Red : public Drawable {
 
 		void update(float frameTime) {
 			lastLoc = location;
-			location = location + moveVector * speed * frameTime;
+			location = location + moveVector * speed * (onPath ? 1 : 1.5) * frameTime;
 		}
 
 		void clearPath() { pathPoints.clear(); }
