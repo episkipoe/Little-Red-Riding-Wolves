@@ -199,7 +199,7 @@ bool World::overlaps(Point &pos) {
 }
 
 void World::genWorld() {
-	srand(92343);
+	srand(6364);
 	vector<Drawable> placedObjects();
 	
 	//door y:50 x:-60
@@ -209,6 +209,7 @@ void World::genWorld() {
 	//int numTurns = rand()%3+1;
 	int numTurns = 2;
 	Point currentPos(80,-60);
+	Point housePos(-60,50);
 
 
 	vector<float> yPositions;
@@ -217,24 +218,20 @@ void World::genWorld() {
 	}
 	sort(yPositions.begin(),yPositions.end());
 
-	for (size_t i=0; i<yPositions.size(); i++) {
-		while (currentPos.y>yPositions[i]) {
-			currentPos.y-=10;
-			paths.push_back(new Path(currentPos));
-		}
+	for (size_t i=yPositions.size()-1; i>=0 && i<yPositions.size(); i-=1) {
+
+		Point end(currentPos.x,yPositions[i]);
+		currentPos=drawPath(currentPos,end,true);
 		red.addPathNode(currentPos);
 
-		while (currentPos.x > -60 + (110/yPositions.size())*(yPositions.size()-i-1)) {
-			currentPos.x-=10;
-			paths.push_back(new Path(currentPos));
-		}
+		//printf("%f\n",-60 + (110.0/yPositions.size())*i);
+		end.x = -60 + (110.0/yPositions.size())*i;
+		currentPos=drawPath(currentPos,end,false);
 		red.addPathNode(currentPos);
 	}
-	while (currentPos.y>-60) {
-		currentPos.y-=10;
-		paths.push_back(new Path(currentPos));
-	}
-	red.addPathNode(currentPos);
+
+	drawPath(currentPos,housePos,true);
+	red.addPathNode(housePos);
 
 	for (int i=0; i<80; i++) {
 		Point pos(rand()%301-150,rand()%301-150);
@@ -263,5 +260,30 @@ void World::genWorld() {
 		pos.x=97;
 		obstacles.push_back(new Fence(pos, VERTICAL_B));
 	}
+}
+
+//assumes end it further north and west than start
+Point World::drawPath(Point start, Point end, bool goUp) {
+	//start.show();
+	//end.show();
+	if (goUp) {
+		while (start.y<end.y) {
+			Point p(start.x,start.y);
+			paths.push_back(new Path(p));
+			start.y=start.y+10;
+		}
+	} else {
+		while (start.x>end.x) {
+			Point p(start.x,start.y);
+			paths.push_back(new Path(p));
+			start.x=start.x-10;
+		}
+	}
+	/*while (start.x>end.x || start.y<end.y) {
+		Point p(start.x,start.y);
+		paths.push_back(new Path(p));
+		start.addVector(angle,10);
+	}*/
+	return start;
 }
 

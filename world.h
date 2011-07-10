@@ -47,6 +47,8 @@ class World {
 		void processWolfEvent();
 		void reset();
 
+		Point drawPath(Point,Point,bool);
+
 		std::string game_over_message;
 
 		//things in the world
