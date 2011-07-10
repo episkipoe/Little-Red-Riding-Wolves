@@ -38,14 +38,14 @@ class Red : public Drawable {
 				//first, factor in all the wolves
 				for (size_t i=0; i<wolvesVector.size(); i++){
 					Point wolfPos = wolvesVector[i].getLocation();
-					moveVector.addVector(location.angle(wolfPos),-5.0/location.distance(wolfPos));
+					moveVector.addVector(location.angle(wolfPos),-8.0/location.distance(wolfPos));
 					//printf("angle: %g\n", location.angle(wolfPos));
 				}
 				//next, factor in all the avoidance points
-                avoidObstacles();
+				avoidObstacles();
 
 				//finally, add the house pull
-				moveVector.addVector(location.angle(housePos),pow(100.0/location.distance(housePos),3));
+				moveVector.addVector(location.angle(housePos),pow(180.0/location.distance(housePos),3));
 				moveVector.normalize();
 				//moveVector.show();
 
@@ -62,15 +62,19 @@ class Red : public Drawable {
 
 		}
 
-        void avoidObstacles(){
-            for (size_t i=0; i<avoidanceList.size(); i++)
-                moveVector.addVector(location.angle(avoidanceList[i]),pow(-20.0/location.distance(avoidanceList[i]),3));
-        }
+		void avoidObstacles(){
+			for (size_t i=0; i<avoidanceList.size(); i++) {
+				if(!sees(avoidanceList[i])) { continue; }
+				Point avoidPoint = avoidanceList[i]->getLocation();
+				float dx = location.distance(avoidPoint);
+				moveVector.addVector(location.angle(avoidPoint),pow(-10.0/dx,3));
+			}
+		}
 
 		void avoid(Drawable *d) {
-            if(isAvoiding.find(d) == isAvoiding.end())
-			    avoidanceList.push_back(d->getLocation());
-            isAvoiding[d] = true;
+			if(isAvoiding.find(d) == isAvoiding.end())
+				avoidanceList.push_back(d);
+			isAvoiding[d] = true;
 		}
 
 
@@ -97,10 +101,10 @@ private:
 	float speed;
 	bool onPath;
 	bool beingChased;
-	vector<Point> avoidanceList;
+	vector<Drawable *> avoidanceList;
 	vector<Point> pathPoints;
 	size_t pathPosition;
-    map<Drawable*, bool> isAvoiding;
+	map<Drawable*, bool> isAvoiding;
 };
 
 #endif

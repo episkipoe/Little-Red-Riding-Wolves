@@ -84,13 +84,16 @@ void World::switchPhase(Phase new_phase) {
 }
 
 void World::display() {
-    house.draw();
+    for(size_t i=0; i<paths.size(); i++) {
+        paths[i]->draw();
+    }
     for(size_t i=0; i<obstacles.size(); i++) {
         obstacles[i]->draw();
     }
     for(size_t i=0; i<wolves.size(); i++) {
         wolves[i].draw();
     }
+    house.draw();
     red.draw();
 
     if(phase==GAME_OVER) {
