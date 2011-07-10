@@ -68,7 +68,8 @@ void World::processRedEvent() {
 }
 
 void World::processWolfEvent() { 
-	if(phase == PLACE_WOLF) return;
+	if(phase == PLACE_WOLF ||
+	   phase == GAME_OVER) return;
 
 	bool onObstacle = false;
 	for(size_t i=0; i<wolves.size(); i++) {
@@ -100,15 +101,14 @@ void World::switchPhase(Phase new_phase) {
 	//playerLoses("Robot red has reached the house");
 	phase = new_phase;
 	if(new_phase == PLACE_WOLF) {
-		glClearColor(0.0f,0.0f,0.0f,1.0f); 
 	} else if(new_phase == AI_RED) {
-		glClearColor(0.2f,0.8f,0.2f,1.0f); 
 		saved_wolves = wolves;
 	} else if(new_phase == PLAYER_RED) {
 		red.resetLocation();
 		wolves = saved_wolves;
 	} else if (new_phase == GAME_OVER) {
 		red.stop();
+		wolves = saved_wolves;
 	}
 }
 
