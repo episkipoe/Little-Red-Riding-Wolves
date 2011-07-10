@@ -37,21 +37,43 @@ class Red : public Drawable {
 			alive=true;
 		}
 
+		void get_n_nearest(vector<Wolf>& wolves, vector<Wolf> & nearest, size_t n) {
+			vector<Wolf> available = wolves;
+			for (size_t i = 0 ; i < n ; i++) {
+				if(!available.size()) return ;
+				double min_dist=location.distance(available[0].getLocation());
+				int min_idx=0;
+				for (size_t j=1; j<available.size(); j++) {
+					double dx=location.distance(available[j].getLocation());
+					if(dx<min_dist) {
+						min_dist=dx;
+						min_idx=j;
+					}
+				}
+				nearest.push_back(available[min_idx]);
+				available.erase(available.begin()+min_idx);
+			}
+		}
+
 		void chase(vector<Wolf>& wolves, Point housePos) {
 			if (beingChased) { //beign chased. Run away from wolves, avoid objects, target house
 				moveVector.x=0;
 				moveVector.y=0;
+				vector<Wolf> nearest_wolves;
+				get_n_nearest(wolves, nearest_wolves, 6);
 				//first, factor in all the wolves
-				for (size_t i=0; i<wolves.size(); i++){
-					Point wolfPos = wolves[i].getLocation();
-					moveVector.addVector(location.angle(wolfPos),-10.0/location.distance(wolfPos));
+				for (size_t i=0; i<nearest_wolves.size(); i++){
+					Point wolfPos = nearest_wolves[i].getLocation();
+					float dx = location.distance(wolfPos);
+					if(dx > 60) continue;
+					moveVector.addVector(location.angle(wolfPos),-5.0/dx);
 					//printf("angle: %g\n", location.angle(wolfPos));
 				}
 				//next, factor in all the avoidance points
 				avoidObstacles();
 
 				//finally, add the house pull
-				moveVector.addVector(location.angle(housePos),pow(140.0/location.distance(housePos),3));
+				moveVector.addVector(location.angle(housePos),pow(150.0/location.distance(housePos),2));
 				moveVector.normalize();
 				//moveVector.show();
 			} else if (pathPoints.size() > 0) { //following the path
