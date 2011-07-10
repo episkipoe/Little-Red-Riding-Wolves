@@ -108,7 +108,7 @@ void reset_eye(void) {
 	eye.x=eye.y=0.0; 
 	eye.z=100.0;
 	look.x=0.0;
-	look.y=10.0;
+	look.y=0.0;
 	look.z=0.0;
 	set_eye();
 }
