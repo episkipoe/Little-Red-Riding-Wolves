@@ -90,7 +90,7 @@ namespace input {
 	}
 
 	void timer(void) {
-		move_eye(left, right, up, down, in, out);
+		//move_eye(left, right, up, down, in, out);
 	}
 
 }
