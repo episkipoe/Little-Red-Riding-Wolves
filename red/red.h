@@ -86,7 +86,7 @@ class Red : public Drawable {
 						return;
 					}
 				}
-				if (location.distance(pathPoints[pathPosition])<15) pathPosition++; //advance the pathPoints list if at the corner
+				if (location.distance(pathPoints[pathPosition])<5) pathPosition++; //advance the pathPoints list if at the corner
 				if (pathPosition<pathPoints.size()) {
 					follow(pathPoints[pathPosition]);
 				} else {
