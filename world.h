@@ -31,6 +31,7 @@ class World {
 		void genWorld();
 
 		void handleMouse(int button, int state, int x, int y);
+		void moveMouse(int x, int y);
 		void handleKeyboard(unsigned char key, int x, int y);
 		void placeObject(int button, int x, int y);
 		void guideRed(int button, int x, int y);

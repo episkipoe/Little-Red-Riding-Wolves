@@ -51,6 +51,7 @@ void initialize_display(void) {
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH) ;
 	glutInitWindowSize(width,height) ;
 	glutCreateWindow("Little Red Riding Wolves") ;
+
 	/*callbacks*/
 	glutDisplayFunc(display) ;
 	glutReshapeFunc(reshape) ;
@@ -67,7 +68,7 @@ void initialize_display(void) {
 
 	loadImages();
 	world.genWorld();
-	reshape(width,height);
+	//reshape(width,height);
 }
 
 void move_eye(bool left, bool right, bool up, bool down, bool in, bool out) {

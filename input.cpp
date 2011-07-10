@@ -61,6 +61,7 @@ namespace input {
 	}
 
 	void movePassive(int x, int y) {
+		world.moveMouse(x, y);
 	}
 
 	void keyboard (unsigned char key, int x, int y) {

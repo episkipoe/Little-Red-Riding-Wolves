@@ -1,4 +1,12 @@
-Dependencies for Building, Ubuntu package names:
+Summer Game Jam 2011
+Theme:	Twice Upon a Time
+Game:	Little Red Riding Wolves
+	First you must build an army of wolves to thwart the AI Red.
+	After your minions have destroyed her then you must avoid that same army in order to reach the house yourself.
+	Are you smarter than Mecha Red Riding Hood?
+
+
+Dependencies:
 cmake
 freeglut3-dev
 libxmu-dev
@@ -12,3 +20,25 @@ make
 
 Run:
 /path/to/checkout/wolves
+
+Convenience Command from within the checkout directory:
+sudo apt-get install cmake freeglut3-dev libxmu-dev libxi-dev libpng12-dev zlib1g-dev && cmake . && make && ./wolves
+
+
+
+Controls and Mechanics:
+
+The Game is split into 3 phases.
+
+Place Wolf phase:
+	Place wolves with left click
+	Space to end phase
+
+AI Red phase:
+	Mecha Red tries to reach house without being consumed
+	You lose if Red achieves sanctuary in the house
+	Phase ends when Red is eaten
+
+Player Red phase:
+	Red chases your mouse
+	If you guide her safely around wolves and trees to grandma's house, you win!

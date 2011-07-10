@@ -135,7 +135,10 @@ void World::handleMouse(int button, int state, int x, int y) {
 
     if(phase == PLACE_WOLF) placeObject(button, x, y); 
     if(phase == PLAYER_RED) guideRed(button, x, y);
+}
 
+void World::moveMouse(int x, int y) {
+    if(phase == PLAYER_RED) guideRed(GLUT_LEFT_BUTTON, x, y);
 }
 
 void World::handleKeyboard(unsigned char key, int x, int y) {

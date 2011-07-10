@@ -42,9 +42,7 @@ class Red : public Drawable {
 					//printf("angle: %g\n", location.angle(wolfPos));
 				}
 				//next, factor in all the avoidance points
-				for (size_t i=0; i<avoidanceList.size(); i++){
-					moveVector.addVector(location.angle(avoidanceList[i]),pow(-20.0/location.distance(avoidanceList[i]),3));
-				}
+                avoidObstacles();
 
 				//finally, add the house pull
 				moveVector.addVector(location.angle(housePos),pow(100.0/location.distance(housePos),3));
@@ -64,6 +62,11 @@ class Red : public Drawable {
 
 		}
 
+        void avoidObstacles(){
+            for (size_t i=0; i<avoidanceList.size(); i++)
+                moveVector.addVector(location.angle(avoidanceList[i]),pow(-20.0/location.distance(avoidanceList[i]),3));
+        }
+
 		void avoid(Drawable *d) {
             if(isAvoiding.find(d) == isAvoiding.end())
 			    avoidanceList.push_back(d->getLocation());
@@ -73,6 +76,7 @@ class Red : public Drawable {
 
 		void follow(Point followPoint) {
 			moveVector = followPoint + (location * -1);
+            avoidObstacles();
 			moveVector.normalize();
 		}
 
