@@ -249,11 +249,6 @@ void World::genWorld() {
 	drawPath(currentPos,housePos,true);
 	red.addPathNode(housePos);
 
-	for (int i=0; i<80; i++) {
-		Point pos(rand()%301-150,rand()%301-150);
-		if(overlaps(pos)) continue;
-		decorations.push_back(new Grass(pos));
-	}
 	for (int i=0; i<40; i++) {
 		Point pos(rand()%301-150,rand()%301-150);
 		if(overlaps(pos)) continue;
