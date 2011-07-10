@@ -57,7 +57,7 @@ bool loadPngImage(const char *name, Image & image) {
     /* Allocate/initialize the memory
      * for image information.  REQUIRED. */
     info_ptr = png_create_info_struct(png_ptr);
-    if (info_ptr == NULL) {
+    if (info_ptr == NULL || !info_ptr->width) {
         fclose(fp);
         png_destroy_read_struct(&png_ptr, png_infopp_NULL, png_infopp_NULL);
         return false;
