@@ -10,6 +10,8 @@
 
 using namespace std;
 
+extern string image_dir;
+
 struct Image {
 	unsigned long width;
 	unsigned long height;
@@ -31,9 +33,10 @@ bool loadPngImage(const char *name, Image & image) {
     png_infop info_ptr;
     unsigned int sig_read = 0;
     FILE *fp;
-
-    if ((fp = fopen(name, "rb")) == NULL)
+	string file_name = image_dir + name;
+    if ((fp = fopen(file_name.c_str(), "rb")) == NULL) {
         return false;
+	}
 
     /* Create and initialize the png_struct
      * with the desired error handler
@@ -172,22 +175,22 @@ GLuint loadTexture(const string & file_name) {
 }
 
 void loadImages() {
-	name_to_texture["tree"] = loadTexture("images/Tree.png");
-	name_to_texture["bush"] = loadTexture("images/BushGreen.png");
-	name_to_texture["wolf_left"] = loadTexture("images/WolfLeft.png");
-	name_to_texture["wolf_right"] = loadTexture("images/WolfRight.png");
-	name_to_texture["house"] = loadTexture("images/GMHouse.png");
-	name_to_texture["red"] = loadTexture("images/RRH.png");
-	name_to_texture["path"] = loadTexture("images/path2.png");
-	name_to_texture["bg"] = loadTexture("images/grassBackground.png");
-	name_to_texture["fence_HORIZONTAL"] = loadTexture("images/FenceHorz.png");
-	name_to_texture["fence_VERTICAL"] = loadTexture("images/FenceLeftVert.png");
-	name_to_texture["fence_VERTICAL_B"] = loadTexture("images/FenceRightVert.png");
-	name_to_texture["fence_GATE"] = loadTexture("images/FenceCenter.png");
-	name_to_texture["fence_BACKSLASH_A"] = loadTexture("images/FenceRightTop.png");
-	name_to_texture["fence_BACKSLASH_B"] = loadTexture("images/FenceLeftBend.png");
-	name_to_texture["fence_FORWARDSLASH_A"] = loadTexture("images/FenceRightBend.png");
-	name_to_texture["fence_FORWARDSLASH_B"] = loadTexture("images/FenceLeftTop.png");
+	name_to_texture["tree"] = loadTexture("Tree.png");
+	name_to_texture["bush"] = loadTexture("BushGreen.png");
+	name_to_texture["wolf_left"] = loadTexture("WolfLeft.png");
+	name_to_texture["wolf_right"] = loadTexture("WolfRight.png");
+	name_to_texture["house"] = loadTexture("GMHouse.png");
+	name_to_texture["red"] = loadTexture("RRH.png");
+	name_to_texture["path"] = loadTexture("path2.png");
+	name_to_texture["bg"] = loadTexture("grassBackground.png");
+	name_to_texture["fence_HORIZONTAL"] = loadTexture("FenceHorz.png");
+	name_to_texture["fence_VERTICAL"] = loadTexture("FenceLeftVert.png");
+	name_to_texture["fence_VERTICAL_B"] = loadTexture("FenceRightVert.png");
+	name_to_texture["fence_GATE"] = loadTexture("FenceCenter.png");
+	name_to_texture["fence_BACKSLASH_A"] = loadTexture("FenceRightTop.png");
+	name_to_texture["fence_BACKSLASH_B"] = loadTexture("FenceLeftBend.png");
+	name_to_texture["fence_FORWARDSLASH_A"] = loadTexture("FenceRightBend.png");
+	name_to_texture["fence_FORWARDSLASH_B"] = loadTexture("FenceLeftTop.png");
 }
 
 void draw_texture(std::string name, Point location, float width, float height) {

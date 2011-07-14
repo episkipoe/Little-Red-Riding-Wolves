@@ -14,6 +14,12 @@ libxi-dev
 libpng12-dev
 zlib1g-dev
 
+(Windows)
+http://gnuwin32.sourceforge.net/packages/zlib.htm
+http://gnuwin32.sourceforge.net/packages/libpng.htm
+http://www.xmission.com/~nate/glut/glut-3.7.6-bin.zip
+
+
 Build with:
 cmake /path/to/checkout
 make
@@ -21,7 +27,7 @@ make
 Run:
 /path/to/checkout/wolves
 
-Convenience Command from within the checkout directory:
+Ubuntu Convenience Command from within the checkout directory:
 sudo apt-get install cmake freeglut3-dev libxmu-dev libxi-dev libpng12-dev zlib1g-dev && cmake . && make && ./wolves
 
 

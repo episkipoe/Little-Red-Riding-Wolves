@@ -1,10 +1,11 @@
-#include <GL/glut.h>
 #include <vector>
+#include <graphics/graphics.h>
 #include "display.h"
 #include "input.h"
 #include "world.h"
 
 World world;
+string image_dir;
 
 #define MSG_TIMER 0
 #define DISPLAY_TIMER 1
@@ -30,6 +31,14 @@ void timer(int val) {
 
 int main(int argc, char** argv) //finaly the main function
 {
+#ifdef WIN32
+	string file_name = argv[0];
+	size_t last = file_name.find_last_of("\\");
+	image_dir = file_name.substr(0, last) + "\\images\\";
+#else
+	image_dir="images/";
+#endif
+
 	//initialise glut
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH) ;
 
